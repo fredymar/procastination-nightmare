@@ -12,6 +12,10 @@ import { ServicesComponent } from './components/services/services.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { TeamComponent } from './components/team/team.component';
+import { MainappComponent } from './routes/mainapp/mainapp.component';
+import { TasktablesComponent } from './components/mainappcomponents/tasktables/tasktables.component';
+import { BarscontainerComponent } from './components/mainappcomponents/barscontainer/barscontainer.component';
+
 
 @NgModule({
   declarations: [
@@ -25,10 +29,14 @@ import { TeamComponent } from './components/team/team.component';
     PortfolioComponent,
     TestimonialsComponent,
     TeamComponent,
+    MainappComponent,
+    TasktablesComponent,
+    BarscontainerComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

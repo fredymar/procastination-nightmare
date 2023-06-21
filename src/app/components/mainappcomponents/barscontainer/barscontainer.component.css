@@ -1,0 +1,416 @@
+:root {
+    --Primary: #00D2E5;
+    --Secundary: #0095FF;
+    --Tertiary: #F36ED6;
+    --Quaternary: #F39E6E;
+    --Senary: #A56EF3;
+    --Body: #3A424A;
+    --Card: #363B45;
+    --Vacios: #5E6E78;
+    --Iconos: #8D95A5;
+    --Notificaciones: #D1D5DB;
+    --Light: #FFFFFF;
+    --Parrafos: #F1F2F4;
+    --Quinary: #FF3D71;
+    --Septenary: #00E096;
+  }
+  
+  /* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    outline: none;
+    text-decoration: none;
+  } */
+  
+  .midiv2 {
+    background: #484e5c;
+  }
+  
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .big-contaier {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+  }
+  
+  .navbar-lateral {
+    width: 3.8rem;
+    height: 100%;
+    min-height: 100vh;
+    background-color: var(--Card);
+  }
+  
+  .section-space-work {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: var(--primary);
+  }
+  
+  
+  .c-form-nav {
+    align-items: center;
+    position: relative;
+  }
+  
+  .me-2{
+    width: 20rem;
+  }
+  
+  .c-form-nav-input {
+    background-color: #484E5C;
+    outline: white;
+    border: white 1px solid;
+  }
+  
+  .c-form-nav-input::placeholder {
+    color: white;
+  }
+  
+  .c-form-nav-icon {
+    position: absolute;
+    right: 1rem;
+  }
+  
+  .background-navbar-superior {
+    background-color: var(--Card);
+    z-index: 10;
+  }
+  
+  @media (max-width:998px) {
+    .c-nav-superior {
+      justify-content: space-between !important;
+    }
+  
+    .c-form-nav {
+      display: none !important;
+    }
+  }
+  
+  
+  @media(min-width:998px) {
+  
+    .navbar-lateral:hover {
+      width: 13rem;
+      transition: all .5s ease;
+    }
+  
+    .navbar-lateral:hover~.section-space-work {
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 998px) {
+    .navbar-expand-lg .navbar-collapse {
+      display: flex !important;
+      flex-basis: auto;
+      justify-content: space-around;
+    }
+  }
+  
+  @media (max-width: 998px) {
+  
+    .c-nav-superior {
+      gap: 1rem;
+    }
+  
+    .c-nav-items-toogle {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      margin: 0.2rem;
+    }
+  
+    .form-control {
+      width: 50%;
+    }
+  }
+  
+  
+  .lateral-navbar {
+    background: #363b45;
+    width: 3.8rem;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    transition: width 0, 2s linear;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0, 1);
+  }
+  
+  @media (min-width:992px) {
+    .lateral-navbar:hover {
+      width: 13rem;
+      transition: all .5s ease;
+    }
+   
+  
+    .bit {
+      display: block;
+    }
+    }
+  
+  .main-logo {
+    transition: all 0, 5s ease;
+    margin-left: 10px;
+  }
+  
+  .main-logo .logo-navbar {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .link-lateral-navbar {
+    color: #8d95a5;
+    width: 300px;
+    padding: 10px;
+  }
+  
+  .link-lateral-navbar:hover{
+    color:#0ab3c2;
+  }
+  
+  .color-blue{
+    color:#0ab3c2;
+  }
+  
+  
+  .material-icons {
+    width: 40px;
+    height: 40px;
+    padding-top: 3px;
+    border: solid 1px #0ab3c2;
+    color: #0ab3c2;
+    border-radius: 10px;
+    font-size: 30px;
+  }
+  
+  .material-icons-outlined {
+    width: 40px;
+    height: 40px;
+    padding-top: 3px;
+    font-size: 30px;
+  }
+  
+  .name-option {
+    top: -10px;
+  }
+  
+  .lateral-navbar:hover body {
+    background: black;
+    opacity: .5;
+  }
+  
+  .logout {
+    bottom: 0;
+  }
+  
+  .title-taks-f {
+    color: darkslategrey;
+  }
+  
+  .to-do-form {
+    width: 30%;
+  }
+  
+  @media (max-width: 992px) {
+    .to-do-form {
+      width: 80%;
+      margin-left: 20rem;
+    }
+  }
+  
+  
+  
+  .f-input-task {
+    padding: 15px 10px;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: none;
+    width: 400px;
+  }
+  
+  .li-container {
+    color: darkslategray;
+  }
+  
+  .space-li {
+    list-style: none;
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-top: 15px;
+    display: flex;
+  }
+  
+  .to-do-work {
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+  }
+  
+  .btn-delete {
+    margin-left: auto;
+    border: none;
+    background-color: #e31746;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    outline: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 10%;
+    font-size: 1.2em;
+  }
+  
+  .btn-delete:hover {
+    cursor: pointer;
+    background-color: darkred;
+  }
+  
+  .btn-add {
+    padding: 5px 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: teal;
+    font-size: 1.4rem;
+    outline: none;
+  }
+  
+  .btn-add:hover {
+    cursor: pointer;
+    background-color: darkcyan;
+  }
+  
+  .empty {
+    color: darkslategrey;
+  }
+  
+  .vacio {
+    display: none;
+  }
+  
+  /*Nicolas Habitos -----------------------------------------------------------------*/
+  .N-bg-primero {
+    background-color: var(--Card);
+    color: var(--Card);
+  }
+  .N-bg-segundo {
+    background-color: var(--Vacios);
+  }
+  .carousel-control-prev {
+    padding: 0 3.5rem 0 0;
+  }
+  .carousel-control-next {
+    padding: 0 0 0 3.5rem;
+  }
+  .carousel-control-prev-first {
+    padding: 0 7.2rem 0 0;
+  }
+  .carousel-control-next-first {
+    padding: 0 0 0 7.2rem;
+  }
+  .N-week_contenedor {
+    background-color: #fff;
+    padding: 0 1rem;
+  }
+  .N-week_txt {
+    font-size: .8rem;
+    padding: .6rem 0 0;
+  }
+  .N-week_rectangle {
+    width: 2rem;
+    height: 2.5rem;
+  }
+  .N-week_input {
+    max-width: 98.2%;
+  }
+  @media (max-width: 950px) { 
+    .N-week_title-span {
+      display: none;
+    }
+  }
+  .N-week_circle {
+    height: 1.6rem;
+    width: 1.6rem;
+    border: #ffffff solid .2rem;
+    margin: 0 auto;
+  }
+  @media (max-width: 1200px) { 
+      .N-aside_contenedor {
+        margin: .75rem;
+        max-width: 96%;
+      }
+  }
+  .N-aside_rectangle {
+    height: 2.1rem;
+  }
+  .N-aside_input {
+    height: 2rem;
+  }
+  @media (max-width: 486px) { 
+    .N-aside_input, .N-aside_title {
+      height: 3rem;
+    }
+  }
+  .N-nivel_rectangle {
+    height: 3em;
+  }
+  .N-nivel_contenedor {
+    width: 35rem;
+  }
+  .N-nivel_exp {
+    width: 3rem;
+    height: 1rem;
+  }
+  .N-nivel_img {
+    /* background-image: url(../assets/img/avatar.png);
+    background-size: cover; */
+    background-color: red;
+    width: 5rem;
+    height: 5rem;
+  } 
+  .N-nivel_medalla {
+    width: 5rem;
+    height: 5rem;
+  }
+  /*--------------------------------------------------------------------------------------------------------------------*/
+  /* Estilos Daniel Guevara */
+  .dg-card-color{
+    background-color: rgb(54, 59, 69);
+  }
+  
+  .dg-no-border-table{
+    border: solid 0px rgb(37, 37, 41);
+  }
+  
+  .dg-corner-border{
+    border-radius: 18px;
+  }
+  
+  .dg-nowrap td{
+    white-space:nowrap;
+  }
+  .dg-flex-wrap-personalized{
+    /* ... your existing flex container styles here */
+  margin: -15px 0 0 0;
+  } 
+  /* add a corresponding positive top margin to all flex items (all direct children of the flex container) */
+  .dg-flex-wrap-personalized> * {
+  margin-top: 15px;
+  }
+  
+  
+  
+  

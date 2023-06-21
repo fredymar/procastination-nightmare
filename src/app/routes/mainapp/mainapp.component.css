@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --Primary: #00D2E5;
+    --Secundary: #0095FF;
+    --Tertiary: #F36ED6;
+    --Quaternary: #F39E6E;
+    --Senary: #A56EF3;
+    --Body: #3A424A;
+    --Card: #363B45;
+    --Vacios: #5E6E78;
+    --Iconos: #8D95A5;
+    --Notificaciones: #D1D5DB;
+    --Light: #FFFFFF;
+    --Parrafos: #F1F2F4;
+    --Quinary: #FF3D71;
+    --Septenary: #00E096;
+  }
+  
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    outline: none;
+    text-decoration: none;
+  }
+
+.midiv {
+    scroll-behavior: smooth;
+    background: #484e5c;
+}

@@ -1,0 +1,25 @@
+/* Estilos Daniel Guevara */
+.dg-card-color{
+    background-color: rgb(54, 59, 69);
+  }
+  
+  .dg-no-border-table{
+    border: solid 0px rgb(37, 37, 41);
+  }
+  
+  .dg-corner-border{
+    border-radius: 18px;
+  }
+  
+  .dg-nowrap td{
+    white-space:nowrap;
+  }
+  .dg-flex-wrap-personalized{
+    /* ... your existing flex container styles here */
+  margin: -15px 0 0 0;
+  } 
+  /* add a corresponding positive top margin to all flex items (all direct children of the flex container) */
+  .dg-flex-wrap-personalized> * {
+  margin-top: 15px;
+  }
+  

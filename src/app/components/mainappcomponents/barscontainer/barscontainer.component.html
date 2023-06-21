@@ -1,0 +1,120 @@
+<div class="big-container d-flex midiv2">
+    <div class="navbar-lateral">
+        <nav class="lateral-navbar top-0 bottom-0 left-0 overflow-hidden text-white">
+            <ul class="px-0">
+                <li class="list-unstyled">
+                    <div class="main-logo text-center d-flex mt-3">
+                        <img src="assets/img/logo.png"
+                            class="rounded-circle logo-navbar" alt="" />
+                        <span class="fw-bold text-uppercase fs-5 mx-4">Pro night</span>
+                    </div>
+                </li>
+                <li class="list-unstyled mt-1">
+                    <a [routerLink]="['/mainapp']" class="link-lateral-navbar fs-6 d-table text-decoration-none position-relative">
+                        <span class="material-icons-outlined position-relative text-center">
+                            timer
+                        </span>
+                        <span class="name-option position-relative ms-4">Timer</span>
+                    </a>
+                </li>
+                <li class="list-unstyled">
+                    <a [routerLink]="['/mainapp']" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                        <span class="material-icons-outlined position-relative text-center">
+                            check_circle
+                        </span>
+                        <span class="name-option position-relative ms-4">Lista de tareas</span>
+                    </a>
+                </li>
+                <li class="list-unstyled">
+                    <a [routerLink]="['/mainapp']" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                        <span class="material-icons-outlined position-relative text-center">
+                            event
+                        </span>
+                        <span class="name-option position-relative ms-4">Calendario</span>
+                    </a>
+                </li>
+                <li class="list-unstyled">
+                    <a [routerLink]="['/mainapp']" (click)="selection='none'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                        <span class="material-icons-outlined position-relative text-center">
+                            autorenew
+                        </span>
+                        <span class="name-option position-relative ms-4">Hábitos</span>
+                    </a>
+                </li>
+                <li class="list-unstyled">
+                    <a [routerLink]="['/mainapp']" (click)="selection='tasktables'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                        <span class="material-icons-outlined position-relative text-center">
+                            table_rows
+                        </span>
+                        <span class="name-option position-relative ms-4">Tareas</span>
+                    </a>
+                </li>
+                <li class="list-unstyled">
+                    <a [routerLink]="['/home']" class="link-lateral-navbar logout position-absolute text-decoration-none d-table">
+                        <span class="material-icons-outlined position-relative text-center">
+                            logout
+                        </span>
+                        <span class="name-option position-relative ms-4">Salir</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="section-space-work">
+        <nav class="navbar navbar-expand-lg background-navbar-superior">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <p style="color:white"></p>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars" style="color: white;"></i>
+                </button>
+                <div class="collapse navbar-collapse c-nav-superior" id="navbarSupportedContent">
+                    <form class="d-flex c-nav-items-toogle" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <div class="input-group c-nav-items-toogle d-flex justify-content-center align-items-center"
+                        style="width: 100%;">
+                        <label class="input-group-text" for="inputGroupSelect01">Cambiar a</label>
+                        <select class="form-select" id="inputGroupSelect01" style="max-width: 12rem">
+                            <option selected>Bit</option>
+                            <option value="1">Bit 2</option>
+                            <option value="2">Bit 3</option>
+                        </select>
+                    </div>
+                    <span class="d-flex align-items-center justify-content-center gap-1 c-nav-items-toogle"
+                        style="color: white">
+                        <button class="btn" style="
+                              border-radius: 0.3rem;
+                              width: 10rem;
+                              background-color: #00d2e5;
+                              color: white;
+                            ">
+                            <p>Crear +</p>
+
+                        </button>
+                        <i class="fa-regular fa-bell"></i>
+                        <button class="btn d-flex align-items-center justify-content-center" style="
+                              background-color: #00d2e5;
+                              border-radius: 50%;
+                              width: 50px;
+                              height: 50px;
+                            ">
+                            <img src="assets/img/avatar.png" alt="" width="40px" height="40px" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container space-work m-2" [ngSwitch]="selection">
+            <app-tasktables *ngSwitchCase="'tasktables'"></app-tasktables>
+            <div *ngSwitchDefault>
+                Seleccione una app
+            </div>
+        </div>
+    </div>
+</div>
