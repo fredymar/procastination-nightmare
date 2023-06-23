@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -15,6 +14,9 @@ import { TeamComponent } from './components/team/team.component';
 import { MainappComponent } from './routes/mainapp/mainapp.component';
 import { TasktablesComponent } from './components/mainappcomponents/tasktables/tasktables.component';
 import { BarscontainerComponent } from './components/mainappcomponents/barscontainer/barscontainer.component';
+import { CalendarComponent } from './components/mainappcomponents/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 
 
 @NgModule({
@@ -32,11 +34,12 @@ import { BarscontainerComponent } from './components/mainappcomponents/barsconta
     MainappComponent,
     TasktablesComponent,
     BarscontainerComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="list-unstyled">
-                    <a [routerLink]="['/mainapp']" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                    <a [routerLink]="['/mainapp']" (click)="selection='calendar'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
                         <span class="material-icons-outlined position-relative text-center">
                             event
                         </span>
@@ -112,6 +112,8 @@
 
         <div class="container space-work m-2" [ngSwitch]="selection">
             <app-tasktables *ngSwitchCase="'tasktables'"></app-tasktables>
+            <app-calendar *ngSwitchCase="'calendar'"></app-calendar>
+
             <div *ngSwitchDefault>
                 Seleccione una app
             </div>

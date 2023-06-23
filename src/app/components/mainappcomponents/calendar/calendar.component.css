@@ -1,0 +1,173 @@
+* {
+  font-family: sans-serif;
+  outline: none;
+  text-decoration: none;
+}
+
+body {
+  background: #484e5c;
+}
+
+
+/*╭︻╦̵̵͇̿̿̿̿╤───
+  ╰┈➤ CALENDARIO
+
+ ⎝𒆜⪼༒🅳🅴🆄🅷🆂༒⪻𒆜⎠ */
+
+
+.k-event-time {
+  color: #363B45;
+}
+
+.k-checkbox {
+  width: 20px;
+}
+
+.k-checkbox:checked {
+  background-color: #00D2E5;
+}
+
+.k-container-day {
+  height: 100px;
+
+}
+
+.k-event-calendar {
+  margin-top: -95px;
+}
+
+.k-margin-0 {
+  margin-bottom: -22px;
+}
+
+.k-border-calendar {
+  border: 1px solid #3A424A;
+}
+
+.k-event-text {
+  font-size: small;
+}
+
+
+/*
+
+ ⎝𒆜⪼༒FONTS༒⪻𒆜⎠ */
+
+ li, ul {
+  list-style: none;
+ }
+
+ .btn-primary {
+  background-color: #00D2E5;
+  border: none;
+ }
+
+ .k-switch:checked {
+  background-color: #00E096;
+  border: 1px solid #00E096;
+ }
+
+.bg-primary {
+  background-color: #00D2E5 !important;
+}
+
+.txt-primary {
+  color: #00D2E5 ;
+}
+
+.bg-secundary {
+  background-color: #0095FF !important;
+}
+
+.txt-secundary {
+  background-color: #0095FF;
+}
+
+.bg-tertiary {
+  background-color: #F36ED6 !important;
+}
+
+.txt-tertiary {
+  background-color: #F36ED6;
+}
+
+.bg-quaternary {
+  background-color: #F39E6E !important;
+}
+
+.txt-quaternary {
+  background-color: #F39E6E;
+}
+
+.bg-quinary {
+  background-color: #FF3D71 !important;
+}
+
+.txt-quinary {
+  background-color: #FF3D71;
+}
+
+.bg-senary {
+  background-color: #A56EF3 !important;
+}
+
+.txt-senary {
+  background-color: #A56EF3;
+}
+
+.bg-septenary {
+  background-color: #00E096 !important;
+}
+
+.txt-septenary {
+  background-color: #00E096;
+}
+
+.bg-body {
+  background-color: #3A424A !important;
+}
+
+.bg-card {
+  background-color: #363B45 !important;
+}
+
+.text-iconos {
+  color: #8D95A5;
+}
+
+.text-notificaciones {
+  color: #D1D5DB;
+
+}
+
+.text-parrafos {
+  color: #F1F2F4;
+}
+
+/*
+
+ ⎝𒆜⪼༒ AGREGAR EVENTO ༒⪻𒆜⎠ */
+
+ .k-agregar-event:hover {
+  color: #00D2E5;
+  cursor: pointer;
+ }
+
+  .glow {
+	display: inline-block;
+	transition-duration: .3s;
+	transition-property: box-shadow;
+
+}
+
+.glow:hover {
+  box-shadow: 0 0 8px #D1D5DB;
+}
+
+.custom-popover {
+  --bs-popover-border-color: #D1D5DB;
+  --bs-popover-header-bg: #363B45;
+  --bs-popover-header-color: var(--bs-white);
+  --bs-popover-body-padding-x: 1rem;
+  --bs-popover-body-padding-y: .5rem;
+}

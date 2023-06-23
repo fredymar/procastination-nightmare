@@ -1,0 +1,357 @@
+<!--
+
+⎝𒆜⪼༒ CALENDARIO ༒⪻𒆜⎠
+-->
+
+<section>
+  <div class="container-fluid k-container-calendar">
+    <div class="row ps-3">
+      <div class="col-lg-3 pt-3 ps-3">
+        <div class="row d-flex flex-xl-column gap-3">
+          <div class="col-md bg-card rounded-3 p-3">
+            <button
+              class="btn btn-lg font-16 btn-primary w-100 mb-3"
+              id="btn-new-event"
+              data-bs-toggle="modal"
+                data-bs-target="#event-modal"
+            >
+              <i class="mdi mdi-plus-circle-outline"></i> Create New Event
+            </button>
+
+            <div
+              class="d-flex align-items-center justify-content-between text-white pb-4"
+            >
+              <h3>Lista de eventos</h3>
+              <!--
+╭
+╰┈➤Boton del modal para accionar
+-->
+            </div>
+            <div class="k-event-list d-flex gap-2 flex-column">
+              <div class="k-event bg-senary d-flex gap-3 p-3 rounded-3 glow">
+                <span class="k-event-time fw-bold">29 Mar - 02 : 00 PM</span>
+                <span class="k-event-text">Nuevo excel</span>
+              </div>
+              <div class="k-event bg-septenary d-flex gap-3 p-3 rounded-3 glow">
+                <span class="k-event-time fw-bold">07 Mar - 09 : 00 AM</span>
+                <span class="k-event-text">Reunion</span>
+              </div>
+              <div class="k-event bg-quinary d-flex gap-3 p-3 rounded-3 glow">
+                <span class="k-event-time fw-bold">17 Mar - 05 : 30 PM</span>
+                <span class="k-event-text">Crear figma</span>
+              </div>
+              <div
+                class="k-event bg-quaternary d-flex gap-3 p-3 rounded-3 glow"
+              >
+                <span class="k-event-time fw-bold">22 Mar - 02 : 30 PM</span>
+                <span class="k-event-text">Crear registro</span>
+              </div>
+              <div class="k-event bg-primary d-flex gap-3 p-3 rounded-3 glow">
+                <span class="k-event-time fw-bold">27 Mar - 09 : 30 AM</span>
+                <span class="k-event-text">Presentacion</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ╭
+╰┈➤Tarjeta filtros y subtareas -->
+
+          <div class="col bg-card rounded-3 p-3">
+            <div class="row d-flex align-items-center">
+              <div class="col text-white"><h3>Subtareas</h3></div>
+            </div>
+            <div
+              class="d-flex align-items-center flex-xl-row flex-lg-column justify-content-between text-white pb-2"
+            >
+              <h5>Filtrar por color</h5>
+              <div class="col">
+                <ul class="d-flex gap-3 justify-content-end">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input fs-2 bg-primary"
+                      type="radio"
+                      name="k-event-color"
+                      value="option2"
+                    />
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input fs-2 bg-septenary"
+                      type="radio"
+                      name="k-event-color"
+                      value="option2"
+                    />
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input fs-2 bg-quaternary"
+                      type="radio"
+                      name="k-event-color"
+                      value="option3"
+                    />
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input fs-2 bg-quinary"
+                      type="radio"
+                      name="k-event-color"
+                      value="option4"
+                    />
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input fs-2 bg-senary"
+                      type="radio"
+                      name="k-event-color"
+                      value="option5"
+                    />
+                  </div>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              class="d-flex align-items-center justify-content-between text-white pb-2 me-3"
+            >
+              <h5>Selecionar evento</h5>
+              <div>
+                <select class="form-select bg-body text-white">
+                  <option selected>Nuevo excel</option>
+                  <option value="1">Reunion</option>
+                  <option value="2">Crear figma</option>
+                  <option value="3">Crear registro</option>
+                  <option value="4">Presentacion</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="text-white d-flex gap-3 pb-3 pt-3">
+              <input
+                type="checkbox"
+                class="form-check-input k-checkbox"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >Abrir el archivo de Excel con los datos de ventas</label
+              >
+            </div>
+            <div class="text-white d-flex gap-3 pb-3 pt-3">
+              <input
+                type="checkbox"
+                class="form-check-input k-checkbox"
+                id="exampleCheck2"
+              />
+              <label class="form-check-label" for="exampleCheck2"
+                >Seleccionar los datos que se desean mostrar en la
+                gráfica.</label
+              >
+            </div>
+            <div class="text-white d-flex gap-3 pb-3 pt-3">
+              <input
+                type="checkbox"
+                class="form-check-input k-checkbox"
+                id="exampleCheck3"
+              />
+              <label class="form-check-label" for="exampleCheck3"
+                >hacer click en la pestaña insertar</label
+              >
+            </div>
+            <div class="text-white d-flex gap-3 pb-3 pt-3">
+              <input
+                type="checkbox"
+                class="form-check-input k-checkbox"
+                id="exampleCheck4"
+              />
+              <label class="form-check-label" for="exampleCheck4"
+                >Asegurarse de que la gráfica esté clara y fácil de
+                entender</label
+              >
+            </div>
+            <div class="text-white d-flex gap-3 pb-3 pt-3">
+              <input
+                type="checkbox"
+                class="form-check-input k-checkbox"
+                id="exampleCheck5"
+              />
+              <label class="form-check-label" for="exampleCheck5"
+                >Guardar y compartir la gráfica con el equipo</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
+╭
+╰┈➤ Vista del Calendario
+-->
+      <div class="col-lg-9 p-3">
+        <div id="calendar">
+          <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+        </div>
+      </div>
+
+      <!--
+
+⎝𒆜⪼༒ |AGREGAR EVENTO - MODAL| ༒⪻𒆜⎠
+-->
+
+      <!--
+╭
+╰┈➤Titulo del modal - caracteristicas principales
+-->
+      <div
+        class="modal fade"
+        id="event-modal"
+        tabindex="-1"
+        aria-labelledby="k-evento-modal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 id="k-evento-modal">Agregar evento</h2>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <!--
+╭
+╰┈➤Body del modal
+-->
+            <div>
+              <div class="container-fluid bg-white p-3 rounded-3">
+                <div class="row d-flex align-items-center">
+                  <div class="col"><h5>Informacion del evento</h5></div>
+                  <div class="col">
+                    <ul class="d-flex gap-3 justify-content-end">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input fs-2 bg-primary"
+                          type="radio"
+                          name="k-event-color"
+                          value="option2"
+                        />
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input fs-2 bg-septenary"
+                          type="radio"
+                          name="k-event-color"
+                          value="option2"
+                        />
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input fs-2 bg-quaternary"
+                          type="radio"
+                          name="k-event-color"
+                          value="option3"
+                        />
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input fs-2 bg-quinary"
+                          type="radio"
+                          name="k-event-color"
+                          value="option4"
+                        />
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input fs-2 bg-senary"
+                          type="radio"
+                          name="k-event-color"
+                          value="option5"
+                        />
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    class="form-control w-100 mb-3"
+                    placeholder="Titulo*"
+                    required
+                  />
+                </div>
+                <!--
+
+╰┈➤Seleccion de hora inicial y final del evento con el area de texto
+-->
+                <div class="d-flex flex-column gap-3">
+                  <div class="row">
+                    <div class="col-6">Hora de inicio</div>
+                    <div class="col-6">Hora final</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-floating">
+                        <input type="datetime-local" class="form-control" />
+                        <label for="dia-event">Fecha inicial</label>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-floating">
+                        <input type="datetime-local" class="form-control" />
+                        <label for="dia-event">Fecha inicial</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <textarea
+                      class="form-control w-100"
+                      id="k-event-txt-area"
+                      rows="5"
+                      placeholder="Escribe tu tarea..."
+                    ></textarea>
+                  </div>
+                </div>
+                <!--
+╭
+╰┈➤ Footer de la tarjeta - notificaciones y botones
+-->
+                <div class="d-flex justify-content-between gap-2 mt-3">
+                  <div>
+                    <div class="form-check form-switch">
+                      <label class="form-check-label" for="k-event-notificacion"
+                        >Notificacion</label
+                      >
+                      <input
+                        class="form-check-input k-switch"
+                        type="checkbox"
+                        role="switch"
+                        id="k-event-notificacion"
+                        checked
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <button type="button" class="btn btn-primary">
+                      Agregar nuevo
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--
+╭
+╰┈➤ Fin del codigo de calendario
+-->
+    </div>
+  </div>
+</section>
