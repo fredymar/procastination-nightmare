@@ -62,10 +62,24 @@ body {
   border: none;
  }
 
+ .btn-primary:hover {
+  background-color: #0393a0;
+ }
+
+ .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  background-color: #0393a0;
+ }
+
+ .btn.disabled, .btn:disabled, fieldset:disabled .btn {
+  background-color: #545341;
+
+ }
+
  .k-switch:checked {
   background-color: #00E096;
   border: 1px solid #00E096;
  }
+
 
 .bg-primary {
   background-color: #00D2E5 !important;
@@ -76,11 +90,11 @@ body {
 }
 
 .bg-secundary {
-  background-color: #0095FF !important;
+  background-color: #0393a0 !important;
 }
 
 .txt-secundary {
-  background-color: #0095FF;
+  background-color: #0393a0;
 }
 
 .bg-tertiary {
@@ -221,5 +235,11 @@ b { /* used for event dates/times */
   margin: 0 auto;
 }
 
+.fc-list-day-cushion {
+  background-color: #363B45;
+}
 
+.fc .fc-list-event:hover td {
+  background-color: #363b45;
+}
 
