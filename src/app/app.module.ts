@@ -17,6 +17,8 @@ import { BarscontainerComponent } from './components/mainappcomponents/barsconta
 import { CalendarComponent } from './components/mainappcomponents/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { EventInput } from '@fullcalendar/core';
 
 
 
@@ -41,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FullCalendarModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
