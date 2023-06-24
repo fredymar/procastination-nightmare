@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular'
-import { CalendarOptions, EventInput } from '@fullcalendar/core';
+import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { NgForm } from '@angular/forms';
+import { EventService } from 'src/app/api/events/event.service';
+import { Event } from 'src/app/models/event.models';
 
 @Component({
   selector: 'app-calendar',
@@ -11,35 +13,61 @@ import { NgForm } from '@angular/forms';
 })
 export class CalendarComponent {
 
-  event: EventInput = {};
-  calendarEventsData: EventInput[] = [];
-  isEditable: boolean = false;
-
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
-
-  // @ViewChild('eventModal', { static: true }) eventModal!: CalendarEventComponent;
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin]
   };
 
-  // openEventModal(title: string = "", data: any = {}): void {
-  //   this.eventModal.openModal(title, data);
-  // }
+  constructor(public eventService: EventService){}
 
+  ngOnInit(){
+    this.getAllEvents()
+  }
 
-  // createNewEvent(form: NgForm) {
-  //   let data = form.value
-  //   if(data._id) {
-  //     this.productService.updateProduct(data).subscribe((data) =>{
-  //       alert("producto actualizado")
-  //       this.getAllProducts()
-  //     })
-  //     this.cleanForm()
-  //     return
-  //   }
+  cleanForm(){
+    this.eventService.eventToCreate = new Event()
+  }
+
+  createOrUpdateEvent(form: NgForm) {
+    let data = form.value
+    if(data._id) {
+      this.eventService.updateEvent(data).subscribe((data) =>{
+        alert("Evento actualizado")
+        this.getAllEvents()
+      })
+      this.cleanForm()
+      return
+    }
+
+    delete(data._id)
+
+    this.eventService.createEvent(data).subscribe((data) =>{
+      console.log({data})
+      this.getAllEvents()
+      this.cleanForm()
+    })
+  }
+
+  getAllEvents(){
+    this.eventService.getAllEvents().subscribe((data: any)=>{
+      this.eventService.allEvents = data.result || []
+      console.log(data)
+    })
+  }
+
+  deleteEvent(_id: string){
+    this.eventService.deleteEvent(_id).subscribe((data) =>{
+      alert("Evento Eliminado")
+      this.getAllEvents()
+    })
+  }
+
+  updateProduct(event : Event){
+    this.eventService.eventToCreate = event
+  }
 
 
 }

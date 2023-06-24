@@ -16,6 +16,7 @@ import { TasktablesComponent } from './components/mainappcomponents/tasktables/t
 import { BarscontainerComponent } from './components/mainappcomponents/barscontainer/barscontainer.component';
 import { CalendarComponent } from './components/mainappcomponents/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -39,7 +40,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
