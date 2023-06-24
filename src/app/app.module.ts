@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +19,11 @@ import { CalendarComponent } from './components/mainappcomponents/calendar/calen
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { EventInput } from '@fullcalendar/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { EventComponent } from './components/mainappcomponents/calendar/event/event.component';
+
+
 
 
 
@@ -38,15 +43,22 @@ import { EventInput } from '@fullcalendar/core';
     TasktablesComponent,
     BarscontainerComponent,
     CalendarComponent,
+    EventComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FullCalendarModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    NgbModalModule,
+    CommonModule,
+    DatePipe
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
