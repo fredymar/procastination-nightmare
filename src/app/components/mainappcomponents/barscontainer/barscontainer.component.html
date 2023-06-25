@@ -42,6 +42,14 @@
                     </a>
                 </li>
                 <li class="list-unstyled">
+                    <a [routerLink]="['/mainapp']" (click)="selection='counting'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                        <span class="material-icons-outlined position-relative text-center">
+                            autorenew
+                        </span>
+                        <span class="name-option position-relative ms-4">Counting</span>
+                    </a>
+                </li>
+                <li class="list-unstyled">
                     <a [routerLink]="['/mainapp']" (click)="selection='tasktables'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
                         <span class="material-icons-outlined position-relative text-center">
                             table_rows
@@ -113,6 +121,7 @@
         <div class="container-fluid space-work m-2" [ngSwitch]="selection">
             <app-tasktables *ngSwitchCase="'tasktables'"></app-tasktables>
             <app-calendar *ngSwitchCase="'calendar'"></app-calendar>
+            <app-counting *ngSwitchCase="'counting'"></app-counting>
 
             <div *ngSwitchDefault>
                 Seleccione una app

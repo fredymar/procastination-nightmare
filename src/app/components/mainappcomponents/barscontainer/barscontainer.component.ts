@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./barscontainer.component.css']
 })
 export class BarscontainerComponent {
-  @Input() selection: string = ""
+  @Input() selection: string = "counting"
 }

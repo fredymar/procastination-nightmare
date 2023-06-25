@@ -22,6 +22,10 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventComponent } from './components/mainappcomponents/calendar/event/event.component';
+import { CountingComponent } from './components/mainappcomponents/counting/counting.component';
+import { CreateComponentComponent } from './components/mainappcomponents/counting/create-component/create-component.component';
+import { HistoryComponent } from './components/mainappcomponents/counting/history/history.component';
+import { TransactionComponent } from './components/mainappcomponents/counting/transaction/transaction.component';
 
 
 
@@ -44,6 +48,10 @@ import { EventComponent } from './components/mainappcomponents/calendar/event/ev
     BarscontainerComponent,
     CalendarComponent,
     EventComponent,
+    CountingComponent,
+    CreateComponentComponent,
+    HistoryComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
