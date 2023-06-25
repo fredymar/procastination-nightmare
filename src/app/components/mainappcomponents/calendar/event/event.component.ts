@@ -13,7 +13,9 @@ import { EventInputs } from '../shared/event.model';
 export class EventComponent implements OnInit {
 
   modelTitle: string = "";
-  event: EventInputs = {};
+  event: EventInputs = {
+    tareas:[]
+  };
 
   @Output() eventSaved: EventEmitter<EventInputs> = new EventEmitter();
   @Output() eventDeleted: EventEmitter<EventInputs> = new EventEmitter();
@@ -53,6 +55,35 @@ export class EventComponent implements OnInit {
   deleteEvent() {
     this.eventDeleted.emit(this.event);
     this.activeModal.dismissAll();
+  }
+
+  saveTarea(tarea: any) {
+    console.log("Tarea guardada:", tarea);
+    tarea.editable = false;
+  }
+
+
+  deleteTarea(tarea: any) {
+    if (this.event.tareas) {
+      const index = this.event.tareas.indexOf(tarea);
+
+      if (index > -1) {
+        this.event.tareas.splice(index, 1);
+        console.log("Tarea eliminada:", tarea);
+      }
+    }
+  }
+
+  nuevaTarea: string = "";
+
+  agregarTarea() {
+    if (this.event.tareas) {
+      this.event.tareas.push({
+        list: this.nuevaTarea,
+        editable: false
+      });
+      this.nuevaTarea = "";
+    }
   }
 
 

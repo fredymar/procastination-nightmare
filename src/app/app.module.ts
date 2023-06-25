@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,10 +22,13 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventComponent } from './components/mainappcomponents/calendar/event/event.component';
+import { registerLocaleData } from '@angular/common';
+import localeEs from "@angular/common/locales/es";
 import { CountingComponent } from './components/mainappcomponents/counting/counting.component';
 import { CreateComponentComponent } from './components/mainappcomponents/counting/create-component/create-component.component';
 import { HistoryComponent } from './components/mainappcomponents/counting/history/history.component';
 import { TransactionComponent } from './components/mainappcomponents/counting/transaction/transaction.component';
+registerLocaleData(localeEs)
 
 
 
@@ -65,7 +68,9 @@ import { TransactionComponent } from './components/mainappcomponents/counting/tr
     DatePipe
   ],
   providers: [
-    DatePipe
+    {provide: LOCALE_ID,
+      useValue: 'es'
+     }
   ],
   bootstrap: [AppComponent]
 })
