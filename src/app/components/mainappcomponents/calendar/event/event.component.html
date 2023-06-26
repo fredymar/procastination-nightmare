@@ -15,7 +15,7 @@
         class="needs-validation"
         name="event-form"
         id="form-event"
-        (ngSubmit)="eventForm.submitted && saveEvent()"
+        (ngSubmit)="eventForm.submitted && createEvent(eventForm)"
         #eventForm="ngForm"
       >
         <div class="row">
@@ -24,10 +24,11 @@
               <label class="form-label">Nombre del Evento</label>
               <input
                 type="text"
+                name="id"
+                id="event-id"
+                [(ngModel)]="event.id"
+                #id="ngModel"
                 hidden
-                name="eventId"
-                [ngModel]="event._id"
-                (ngModelChange)="event._id = $event"
               />
               <input
                 class="form-control"
@@ -124,25 +125,26 @@
             <div class="mb-3">
               <label class="form-label">Category</label>
               <select
-                class="form-select"
-                name="category"
-                id="event-category"
-                required
-                [(ngModel)]="event['category']"
-                #category="ngModel"
-                [ngClass]="{
-                  'is-invalid':
-                    eventForm.submitted &&
-                    category.invalid &&
-                    (category.dirty || category.touched)
-                }"
-              >
-                <option value="bg-primary" selected>Marketing</option>
-                <option value="bg-septenary">Social</option>
-                <option value="bg-quaternary">Personal</option>
-                <option value="bg-quinary">Urgente</option>
-                <option value="bg-senary">Contabilidad</option>
-              </select>
+              class="form-select"
+              id="event-category"
+              required
+              name="category"
+              [(ngModel)]="event.category"
+              #category="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  eventForm.submitted &&
+                  category.invalid &&
+                  (category.dirty || category.touched)
+              }"
+              (change)="event.classNames = [event.category]"
+            >
+              <option value="bg-primary" selected>Marketing</option>
+              <option value="bg-septenary">Social</option>
+              <option value="bg-quaternary">Personal</option>
+              <option value="bg-quinary">Urgente</option>
+              <option value="bg-senary">Contabilidad</option>
+            </select>
 
               <div
                 *ngIf="

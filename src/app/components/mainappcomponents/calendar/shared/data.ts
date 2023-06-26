@@ -1,11 +1,6 @@
 import { EventInput } from "@fullcalendar/core";
 import { EventInputs } from "./event.model";
 
-
-
-
-
-
 export const CALENDAREVENTS: EventInputs[] = [{
   id: '1',
   title: 'Reunión con Mr. Shreyu',

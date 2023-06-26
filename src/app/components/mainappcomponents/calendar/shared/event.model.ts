@@ -9,7 +9,7 @@ export interface EventInputs {
   end?: any;
   description?: string;
   _id?: string;
-  category?: string | any;
+  category?: string;
   isEditMode?: boolean;
   tareas?: {
     list: string;
@@ -48,7 +48,12 @@ export class EventModel implements EventInputs {
     _id = '',
     category = '',
     isEditMode = true,
-    tareas = [],
+    tareas = [
+      {
+        list: '',
+        editable: true
+      }
+    ],
     classNames = ''
   ) {
     this.id = id;

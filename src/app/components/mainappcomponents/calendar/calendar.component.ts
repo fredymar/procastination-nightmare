@@ -16,7 +16,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { EventComponent } from './event/event.component';
 import { CALENDAREVENTS } from './shared/data';
-import { EventInputs } from './shared/event.model';
+import { EventInputs, EventModel } from './shared/event.model';
 import esLocale from '@fullcalendar/core/locales/es';
 import { EventService } from 'src/app/api/events/event.service';
 
@@ -47,7 +47,7 @@ export class CalendarComponent implements OnInit {
     this.initCalendar();
     this.eventService.getAllEvents().subscribe((events: any) => {
       this.calendarEventsData = events.result;
-      this._fetchData();
+      // this._fetchData();
       // Asignar una copia de los eventos al calendario
       this.calendarOptions.events = [...this.calendarEventsData];
       console.log(events.result);
@@ -146,7 +146,8 @@ export class CalendarComponent implements OnInit {
       category: 'bg-danger',
       start: new Date(),
       end: new Date(),
-      description: ''
+      description: '',
+      tareas: []
     };
     this.isEditable = false;
     this.openEventModal('Agregar nuevo evento', this.event);
@@ -192,15 +193,16 @@ export class CalendarComponent implements OnInit {
    * @param arg DateClickArg
    */
   handleDateClick(arg: DateClickArg): void {
-    this.selectedDay = arg;
+    // this.selectedDay = arg;
     this.event = {
       id: String(this.calendarEventsData.length + 1),
       title: '',
       classNames: '',
       category: 'bg-danger',
-      start: this.selectedDay.date,
-      end: this.selectedDay.date,
+      start: new Date(),
+      end: new Date(),
       description: '',
+      tareas: []
 
     };
     this.isEditable = false;
@@ -218,50 +220,45 @@ export class CalendarComponent implements OnInit {
     title: event.title,
     classNames: event.classNames,
     category: event.classNames[0],
-    start: event.start || undefined,
-    end: event.end || undefined,
-    description: event.extendedProps["description"], // Agrega la propiedad de descripción
+    start: event.start,
+    end: event.end,
+    description: event.extendedProps["description"],
     tareas: event.extendedProps['tareas']
   };
   this.isEditable = true;
   this.openEventModal('Editar evento', this.event);
+  console.log(this.event)
 }
 
   /**
    * Handle the event save
    * @param newEvent new event
-   */
-  handleEventSave(newEvent: EventInput): void {
+  */
+ handleEventSave(newEvent: EventInputs): void {
     if (this.isEditable) {
       let modifiedEvents = [...this.calendarEventsData];
       const eventIndex = modifiedEvents.findIndex(
         (event) => event.id === newEvent.id
-      );
-      this.calendarEventsData[eventIndex].title = newEvent.title;
-      this.calendarEventsData[eventIndex].classNames = newEvent['category'];
-      this.calendarEventsData[eventIndex].start = new Date(newEvent.start as string);
-      this.calendarEventsData[eventIndex].end = new Date(newEvent.end as string);
-      modifiedEvents[eventIndex].description = newEvent['description'];
-      modifiedEvents[eventIndex].tareas = newEvent['tareas'];
-
-      // this.calendarEventsData[eventIndex].description = newEvent.description;
-      this.calendarEventsData = modifiedEvents;
-      this.isEditable = false;
+        );
+        this.calendarEventsData[eventIndex].title = newEvent.title;
+        this.calendarEventsData[eventIndex].classNames = newEvent['category'];
+        this.calendarEventsData = modifiedEvents;
+        this.isEditable = false;
 
     } else {
       let nEvent = {
         id: newEvent.id,
         title: newEvent.title,
-        start: new Date(newEvent.start as string) || undefined,
-  end: new Date(newEvent.end as string) || undefined,
+        start: new Date(newEvent.start) ,
+        end: new Date(newEvent.end) ,
         description: newEvent['description'],
         classNames: newEvent['category'],
         tareas: newEvent['tareas']
+
       };
       this.calendarEventsData.push(nEvent);
     }
     this.calendarOptions.events = [...this.calendarEventsData];
-    console.log(this.event, this.calendarEventsData)
   }
 
   /**
@@ -283,8 +280,6 @@ export class CalendarComponent implements OnInit {
   // Función que se ejecuta cuando se selecciona un evento
   onEventSelected(event: any) {
     this.selectedEvent = event;
-
-    console.log(this.onEventSelected, this.selectedEvent)
   }
 
 }
