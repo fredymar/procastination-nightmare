@@ -29,8 +29,6 @@ import { TransactionComponent } from './components/mainappcomponents/counting/tr
 
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

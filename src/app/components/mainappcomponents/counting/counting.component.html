@@ -5,20 +5,29 @@
     </div>
     <!-- Tabla de Vista, filter, sort, search -->
     <button class="btn btn-sucess text-light" (click)="createShowFunction()">Crear una nueva billetera</button>
-    <app-create-component *ngIf="createShow" [createShow]="createShow"></app-create-component>
-    <app-transaction *ngIf="transactionShow" [type]="type"></app-transaction>
-    <app-history *ngIf="historyShow"></app-history>
-    <div class="card" style="width: 20rem;">
-        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-            <h2 class="" style="font-size: 1.5rem;">Nombre billetera</h2>
-            <p class="card-text">Descripcion de la billetera</p>
-            <p class="card-text" style="font-size: 1.15rem;">Saldo :<span style="font-size: 1.25rem;">$20000</span></p>
-            <div>
-                <p class="btn btn-success p-2 m-1" (click)="typeIncomeFunction()">Agregar Ingreso</p>
-                <p class="btn btn-danger p-2 m-1 " (click)="typeExpenseFunction()">Agregar Egreso</p>
+    <app-create-component *ngIf="createShow" [createShow]="createShow" [bank]="bankSelected"></app-create-component>
+    <app-transaction *ngIf="transactionShow" [type]="type" [bank]="bankSelected"></app-transaction>
+    <app-history *ngIf="historyShow" [bank]="bankSelected"></app-history>
+    <div class="row">
+        <div class="col-md-12 col-lg-6 col-xl-4" *ngFor="let bank of allBanks; index as i">
+            <div class="card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h2 class="" style="font-size: 1.5rem;">{{bank.name}}</h2>
+                    <p class="card-text">{{bank.description}}</p>
+                    <p class="card-text" style="font-size: 1.15rem;">Saldo :<span
+                            style="font-size: 1.25rem;">${{bank.initial}}</span>
+                    </p>
+                    <div>
+                        <p class="btn btn-success p-2 m-1" (click)="typeIncomeFunction(bank)">Agregar Ingreso</p>
+                        <p class="btn btn-danger p-2 m-1 " (click)="typeExpenseFunction(bank)">Agregar Egreso</p>
+                    </div>
+                    <p class="btn btn-info p-2 m-1 text-white" (click)="historyShowFunction(bank)">Historial de
+                        dinero
+                    </p>
+                </div>
             </div>
-            <p href="#" class="btn btn-info p-2 m-1 text-white" (click)="historyShowFunction()">Historial de dinero</p>
         </div>
     </div>
+
 
 </div>

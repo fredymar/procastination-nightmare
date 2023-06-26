@@ -1,40 +1,63 @@
 <div class="modal fade show" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLiveLabel" style="display: block;" aria-modal="true" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content p-5">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Info</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-            <div class="modal-footer p-0">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Crear</button>
-            </div>
-        </div>
+  aria-labelledby="staticBackdropLiveLabel" style="display: block;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content p-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Información</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="!toEdit">
+          <tr *ngFor="let transaction of bankData; index as i">
+            <th scope="row">{{i + 1}}</th>
+            <td *ngIf="transaction.type == 'income'">Ingreso</td>
+            <td *ngIf="transaction.type == 'expense'">Gasto</td>
+            <td *ngIf="!toEdit">{{transaction.value}}</td>
+            <td *ngIf="!toEdit"> {{transaction.description || '.'}} </td>
+            <td *ngIf="!toEdit">{{transaction.createdAt.substr(0,10)}}</td>
+            <td>
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <button class="btn" (click)="deleteTransaction(transaction._id)"> <i class="fa-solid fa-trash"></i>
+                </button>
+                <button class="btn" (click)="toEditFunction(transaction)"> <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="toEdit">
+          <tr>
+            <th scope="row">{{1}}</th>
+            <td *ngIf="transactionToEdit.type == 'income'">Ingreso</td>
+            <td *ngIf="transactionToEdit.type == 'expense'">Gasto</td>
+            <td>
+              <input name="value" #value="ngModel" [(ngModel)]="bankService.transactionToCreate.value" type="number"
+                class="form-control" placeholder="$$$">
+            </td>
+            <td>
+              <textarea name="description" #description="ngModel"
+                [(ngModel)]="bankService.transactionToCreate.description" class="form-control" rows="2"></textarea>
+            </td>
+            <td>
+              {{transactionToEdit.createdAt.substr(0,10)}}
+            </td>
+            <td>
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <button class="btn" (click)="updateTransaction()"><i class="fa-solid fa-floppy-disk"></i>
+                </button>
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+
+      </table>
     </div>
+  </div>
 </div>

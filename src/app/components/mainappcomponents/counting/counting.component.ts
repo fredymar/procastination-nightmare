@@ -1,4 +1,6 @@
 import { Component ,OnInit,Input} from '@angular/core';
+import { BankService } from 'src/app/api/bank/bank.service';
+import { Bank } from 'src/app/models/bank.models';
 
 @Component({
   selector: 'app-counting',
@@ -10,6 +12,18 @@ export class CountingComponent {
   transactionShow = false
   historyShow = false
   type = ''
+  allBanks: Bank[] = []
+  bankSelected = ''
+
+  constructor(public bankService: BankService) {}
+
+  ngOnInit(): void {
+    this.bankService.getAllBanks().subscribe((data: any) => {
+      console.log({ data });
+      this.allBanks = data
+    });
+  }
+
 
   createShowFunction(){
     this.createShow = !this.createShow
@@ -17,16 +31,19 @@ export class CountingComponent {
   transactionShowFunction(){
     this.transactionShow = !this.transactionShow
   }
-  typeIncomeFunction(){
+  typeIncomeFunction(bank:any){
     this.type = 'income'
+    this.bankSelected = bank._id
     this.transactionShow = !this.transactionShow
   }
-  typeExpenseFunction(){
+  typeExpenseFunction(bank:any){
     this.type = 'expense'
+    this.bankSelected = bank._id
     this.transactionShow = !this.transactionShow
   }
 
-  historyShowFunction(){
+  historyShowFunction(bank:any){
+    this.bankSelected = bank._id
     this.historyShow = !this.historyShow
   }
 

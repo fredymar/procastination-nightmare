@@ -10,6 +10,7 @@ import { Bank } from 'src/app/models/bank.models';
 })
 export class CreateComponentComponent {
   @Input() createShow!: Boolean;
+  @Input() bank!: String;
 
 
   createShowFunction() {
