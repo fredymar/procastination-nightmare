@@ -18,6 +18,8 @@ import { EventComponent } from './event/event.component';
 import { CALENDAREVENTS } from './shared/data';
 import { EventInputs } from './shared/event.model';
 import esLocale from '@fullcalendar/core/locales/es';
+import { EventService } from 'src/app/api/events/event.service';
+
 
 @Component({
   selector: 'app-calendar',
@@ -30,8 +32,7 @@ export class CalendarComponent implements OnInit {
   selectedDay: any = {};
   isEditable: boolean = false;
   event: EventInputs = {
-    classNames: undefined,
-    category: ''
+    tareas:[]
   };
   // externalEvents: ExternalEvent[] = [];
   //reference to full calender element
@@ -40,12 +41,24 @@ export class CalendarComponent implements OnInit {
 
   @ViewChild('eventModal', { static: true }) eventModal!: EventComponent;
 
-  constructor() {}
+  constructor(public eventService : EventService) {}
 
   ngOnInit(): void {
-    this._fetchData();
     this.initCalendar();
+    this.eventService.getAllEvents().subscribe((events: any) => {
+      this.calendarEventsData = events.result;
+      this._fetchData();
+      // Asignar una copia de los eventos al calendario
+      this.calendarOptions.events = [...this.calendarEventsData];
+      console.log(events.result);
+    });
+
   }
+
+  // ngOnInit(): void {
+  //   this._fetchData();
+  //   this.initCalendar();
+  // }
 
   ngAfterViewInit(): void {
     new Draggable(document.getElementById('external-events')!, {
@@ -83,6 +96,7 @@ export class CalendarComponent implements OnInit {
         month: 'long',
       },
       locale: esLocale,
+      timeZone: 'local',
       initialView: 'dayGridMonth',
       handleWindowResize: true,
       headerToolbar: {
@@ -106,7 +120,7 @@ export class CalendarComponent implements OnInit {
    */
   _fetchData(): void {
     this.calendarEventsData = CALENDAREVENTS;
-    console.log(this.calendarEventsData)
+    // console.log(this.calendarEventsData)
     // this.externalEvents = EXTERNALEVENTS;
 
   }
@@ -171,7 +185,6 @@ export class CalendarComponent implements OnInit {
 
     this.calendarEventsData = modifiedEvents;
     this.isEditable = false;
-    console.log(this.calendarEventsData)
   }
 
   /**
@@ -187,7 +200,8 @@ export class CalendarComponent implements OnInit {
       category: 'bg-danger',
       start: this.selectedDay.date,
       end: this.selectedDay.date,
-      description: ''
+      description: '',
+
     };
     this.isEditable = false;
     this.openEventModal('Agregar nuevo evento', this.event);
@@ -207,6 +221,7 @@ export class CalendarComponent implements OnInit {
     start: event.start || undefined,
     end: event.end || undefined,
     description: event.extendedProps["description"], // Agrega la propiedad de descripción
+    tareas: event.extendedProps['tareas']
   };
   this.isEditable = true;
   this.openEventModal('Editar evento', this.event);
@@ -225,7 +240,9 @@ export class CalendarComponent implements OnInit {
       this.calendarEventsData[eventIndex].title = newEvent.title;
       this.calendarEventsData[eventIndex].classNames = newEvent['category'];
       this.calendarEventsData[eventIndex].start = new Date(newEvent.start as string);
-this.calendarEventsData[eventIndex].end = new Date(newEvent.end as string);
+      this.calendarEventsData[eventIndex].end = new Date(newEvent.end as string);
+      modifiedEvents[eventIndex].description = newEvent['description'];
+      modifiedEvents[eventIndex].tareas = newEvent['tareas'];
 
       // this.calendarEventsData[eventIndex].description = newEvent.description;
       this.calendarEventsData = modifiedEvents;
@@ -239,6 +256,7 @@ this.calendarEventsData[eventIndex].end = new Date(newEvent.end as string);
   end: new Date(newEvent.end as string) || undefined,
         description: newEvent['description'],
         classNames: newEvent['category'],
+        tareas: newEvent['tareas']
       };
       this.calendarEventsData.push(nEvent);
     }
@@ -260,141 +278,13 @@ this.calendarEventsData[eventIndex].end = new Date(newEvent.end as string);
     this.calendarOptions.events = [...this.calendarEventsData];
   }
 
-  // modelTitle: string = "";
-  // event: EventInput = {};
+  selectedEvent: any; // Propiedad para almacenar el evento seleccionado
 
-  // @Output() eventSaved: EventEmitter<EventInput> = new EventEmitter();
-  // @Output() eventDeleted: EventEmitter<EventInput> = new EventEmitter();
+  // Función que se ejecuta cuando se selecciona un evento
+  onEventSelected(event: any) {
+    this.selectedEvent = event;
 
-  // @ViewChild('content', { static: true }) content: any;
+    console.log(this.onEventSelected, this.selectedEvent)
+  }
 
-  // calendarVisible = signal(true);
-  // calendarOptions = signal<CalendarOptions>({
-  //   plugins: [
-  //     interactionPlugin,
-  //     dayGridPlugin,
-  //     timeGridPlugin,
-  //     listPlugin,
-  //   ],
-  //   headerToolbar: {
-  //     left: 'prev,next today',
-  //     center: 'title',
-  //     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-  //   },
-  //   initialView: 'dayGridMonth',
-  //   initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-  //   weekends: true,
-  //   editable: true,
-  //   selectable: true,
-  //   selectMirror: true,
-  //   dayMaxEvents: true,
-  //   select: this.handleDateSelect.bind(this),
-  //   eventClick: this.handleEventClick.bind(this),
-  //   eventsSet: this.handleEvents.bind(this)
-  //   /* you can update a remote database when these fire:
-  //   eventAdd:
-  //   eventChange:
-  //   eventRemove:
-  //   */
-  // });
-  // currentEvents = signal<EventApi[]>([]);
-
-  // constructor(private changeDetector: ChangeDetectorRef) {
-  // }
-
-  // handleDateSelect(selectInfo: DateSelectArg) {
-  //   const title = prompt('Please enter a new title for your event');
-
-  //   const calendarApi = selectInfo.view.calendar;
-
-  //   calendarApi.unselect(); // clear date selection
-
-  //   if (title) {
-  //     calendarApi.addEvent({
-  //       id: createEventId(),
-  //       title,
-  //       start: selectInfo.startStr,
-  //       end: selectInfo.endStr,
-  //       allDay: selectInfo.allDay
-  //     });
-  //   }
-  // }
-
-  // handleEventClick(clickInfo: EventClickArg, remove: boolean = false) {
-  //   console.log({ev: clickInfo.event})
-  //   const calendarApi: any = clickInfo.view.calendar
-  //   console.log(calendarApi.getEvents().filter((e: any) => e.title))
-
-  //   // remove = true
-
-  //   if(remove){
-  //     clickInfo.event.remove()
-  //     return
-  //   }
-
-  //   clickInfo.event.remove()
-  //   calendarApi.addEvent({
-  //     id: createEventId(),
-  //     title: "otro evento",
-  //     start: new Date(),
-  //     end: new Date(),
-  //     allDay: true,
-  //   })
-
-  // }
-
-  // handleEvents(events: EventApi[]) {
-  //   this.currentEvents.set(events);
-  //   this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
-  // }
 }
-
-//   constructor(public eventService: EventService){}
-
-//   ngOnInit(){
-//     this.getAllEvents()
-//   }
-
-//   cleanForm(){
-//     this.eventService.eventToCreate = new Event()
-//   }
-
-//   createOrUpdateEvent(form: NgForm) {
-//     let data = form.value
-//     if(data._id) {
-//       this.eventService.updateEvent(data).subscribe((data) =>{
-//         alert("Evento actualizado")
-//         this.getAllEvents()
-//       })
-//       this.cleanForm()
-//       return
-//     }
-
-//     delete(data._id)
-
-//     this.eventService.createEvent(data).subscribe((data) =>{
-//       console.log({data})
-//       this.getAllEvents()
-//       this.cleanForm()
-//     })
-//   }
-
-//   getAllEvents(){
-//     this.eventService.getAllEvents().subscribe((data: any)=>{
-//       this.eventService.allEvents = data.result || []
-//       console.log(data)
-//     })
-//   }
-
-//   deleteEvent(_id: string){
-//     this.eventService.deleteEvent(_id).subscribe((data) =>{
-//       alert("Evento Eliminado")
-//       this.getAllEvents()
-//     })
-//   }
-
-//   updateProduct(event : Event){
-//     this.eventService.eventToCreate = event
-//   }
-
-// }

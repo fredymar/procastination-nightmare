@@ -1,102 +1,278 @@
 <ng-template #content let-modal>
-  <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-      <button type="button" class="btn-close float-end" aria-label="Close" (click)="modal.dismiss('')">
-      </button>
-      <h5 class="modal-title" id="modal-title">{{modelTitle}}</h5>
+  <div class="bg-card rounded-3 text-white">
+    <div class="modal-header py-3 px-4 border-bottom-0 d-block">
+      <button
+        type="button"
+        class="btn-close float-end"
+        aria-label="Close"
+        (click)="modal.dismiss('')"
+      ></button>
+      <h1 class="modal-title" id="modal-title">{{ modelTitle }}</h1>
+    </div>
+    <div class="modal-body px-4 pb-4 pt-0">
+      <form
+        data-bs-theme="dark"
+        class="needs-validation"
+        name="event-form"
+        id="form-event"
+        (ngSubmit)="eventForm.submitted && saveEvent()"
+        #eventForm="ngForm"
+      >
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <label class="form-label">Nombre del Evento</label>
+              <input
+                type="text"
+                hidden
+                name="eventId"
+                [ngModel]="event._id"
+                (ngModelChange)="event._id = $event"
+              />
+              <input
+                class="form-control"
+                placeholder="Inserte el titulo del evento"
+                type="text"
+                name="title"
+                id="event-title"
+                required
+                [(ngModel)]="event.title"
+                #title="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    eventForm.submitted &&
+                    title.invalid &&
+                    (title.dirty || title.touched)
+                }"
+              />
 
-  </div>
-  <div class="modal-body px-4 pb-4 pt-0">
-      <form class="needs-validation" name="event-form" id="form-event" (ngSubmit)="eventForm.submitted && saveEvent()"
-          #eventForm="ngForm">
-          <div class="row">
-              <div class="col-12">
-                  <div class="mb-3">
-                      <label class="form-label">Nombre del Evento</label>
-                      <input class="form-control" placeholder="Inserte el titulo del evento" type="text" name="title"
-                          id="event-title" required [(ngModel)]="event.title" #title="ngModel"
-                          [ngClass]="{ 'is-invalid':eventForm.submitted && title.invalid && (title.dirty || title.touched)}" />
-
-                      <div *ngIf="eventForm.submitted && title.invalid && (title.dirty || title.touched)"
-                          class="invalid-feedback">
-                          Indique un nombre de evento válido
-                      </div>
-
-                  </div>
+              <div
+                *ngIf="
+                  eventForm.submitted &&
+                  title.invalid &&
+                  (title.dirty || title.touched)
+                "
+                class="invalid-feedback"
+              >
+                Indique un nombre de evento válido
               </div>
-
-              <div class="d-flex justify-content-between">
-                <div class="mb-3 col-5">
-                  <label class="form-label">Hora de Inicio</label>
-                  <input class="form-control" type="date" name="start"
-                      id="event-start" required [(ngModel)]="event.start" #start="ngModel"
-                      [ngClass]="{ 'is-invalid':eventForm.submitted && start.invalid && (start.dirty || start.touched)}" />
-
-                  <div *ngIf="eventForm.submitted && start.invalid && (start.dirty || start.touched)"
-                      class="invalid-feedback">
-                      Indique una fecha valida
-                  </div>
-              </div>
-              <div class="mb-3 col-5">
-                  <label class="form-label">Hora Final</label>
-                  <input class="form-control" type="date" name="end"
-                      id="event-end" required [(ngModel)]="event.end" #end="ngModel"
-                      [ngClass]="{ 'is-invalid':eventForm.submitted && end.invalid && (end.dirty || end.touched)}" />
-
-                  <div *ngIf="eventForm.submitted && end.invalid && (end.dirty || end.touched)"
-                      class="invalid-feedback">
-                      Indique una fecha valida
-                  </div>
-              </div>
-              </div>
-
-              <div class="col-12">
-                  <div class="mb-3">
-                      <label class="form-label">Category</label>
-                      <select class="form-select" name="category" id="event-category" required
-                          [(ngModel)]="event['category']" #category="ngModel"
-                          [ngClass]="{ 'is-invalid':eventForm.submitted && category.invalid && (category.dirty || category.touched)}">
-                          <option value="bg-primary" selected>Marketing</option>
-                          <option value="bg-septenary">Social</option>
-                          <option value="bg-quaternary">Personal</option>
-                          <option value="bg-quinary">Urgente</option>
-                          <option value="bg-senary">Contabilidad</option>
-                      </select>
-                      <div *ngIf="eventForm.submitted && category.invalid && (category.dirty || category.touched)"
-                          class="invalid-feedback">
-                          Por favor seleccione una categoria valida
-                      </div>
-                  </div>
-              </div>
-
-              <div class="col-12">
-                <div class="mb-3">
-                  <textarea
-                  class="form-control w-100"
-                  rows="5"
-                  placeholder="Escribe una descripcion para el evento..."
-                  name="description"
-                      id="event-description" [(ngModel)]="event['description']" #description="ngModel"
-                      [ngClass]="{ 'is-invalid':eventForm.submitted && description.invalid && (description.dirty || description.touched)}"
-                ></textarea>
-                </div>
-
-                <div *ngIf="eventForm.submitted && description.invalid && (description.dirty || description.touched)"
-                      class="invalid-feedback">
-                      Indique una fecha valida
-                  </div>
-              </div>
+            </div>
           </div>
-          <div class="row mt-2">
-              <div class="col-md-6 col-4">
-                  <button type="button" class="btn btn-danger" *ngIf="modelTitle==='Editar evento'"
-                      (click)="deleteEvent()" id="btn-delete-event">Eliminar</button>
+
+          <div class="d-flex justify-content-between">
+            <div class="mb-3 col-5">
+              <label class="form-label">Hora de Inicio</label>
+              <input
+                class="form-control"
+                type="date"
+                name="start"
+                id="event-start"
+                required
+                [(ngModel)]="event.start"
+                #start="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    eventForm.submitted &&
+                    start.invalid &&
+                    (start.dirty || start.touched)
+                }"
+              />
+
+              <div
+                *ngIf="
+                  eventForm.submitted &&
+                  start.invalid &&
+                  (start.dirty || start.touched)
+                "
+                class="invalid-feedback"
+              >
+                Indique una fecha valida
               </div>
-              <div class="col-md-6 col-8 text-end">
-                  <button type="button" class="btn btn-secondary me-1" (click)="modal.dismiss('')">Cancelar</button>
-                  <button type="submit" class="btn btn-success" id="btn-save-event"
-                      [disabled]="!eventForm.form.valid">Guardar</button>
+            </div>
+            <div class="mb-3 col-5">
+              <label class="form-label">Hora Final</label>
+              <input
+                class="form-control"
+                type="date"
+                name="end"
+                id="event-end"
+                required
+                [(ngModel)]="event.end"
+                #end="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    eventForm.submitted &&
+                    end.invalid &&
+                    (end.dirty || end.touched)
+                }"
+              />
+
+              <div
+                *ngIf="
+                  eventForm.submitted &&
+                  end.invalid &&
+                  (end.dirty || end.touched)
+                "
+                class="invalid-feedback"
+              >
+                Indique una fecha valida
               </div>
+            </div>
           </div>
+
+          <div class="col-12">
+            <div class="mb-3">
+              <label class="form-label">Category</label>
+              <select
+                class="form-select"
+                name="category"
+                id="event-category"
+                required
+                [(ngModel)]="event['category']"
+                #category="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    eventForm.submitted &&
+                    category.invalid &&
+                    (category.dirty || category.touched)
+                }"
+              >
+                <option value="bg-primary" selected>Marketing</option>
+                <option value="bg-septenary">Social</option>
+                <option value="bg-quaternary">Personal</option>
+                <option value="bg-quinary">Urgente</option>
+                <option value="bg-senary">Contabilidad</option>
+              </select>
+
+              <div
+                *ngIf="
+                  eventForm.submitted &&
+                  category.invalid &&
+                  (category.dirty || category.touched)
+                "
+                class="invalid-feedback"
+              >
+                Por favor seleccione una categoria valida
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="mb-3">
+              <textarea
+                class="form-control w-100"
+                rows="5"
+                placeholder="Escribe una descripcion para el evento..."
+                name="description"
+                id="event-description"
+                [(ngModel)]="event['description']"
+                #description="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    eventForm.submitted &&
+                    description.invalid &&
+                    (description.dirty || description.touched)
+                }"
+              ></textarea>
+            </div>
+
+            <div
+              *ngIf="
+                eventForm.submitted &&
+                description.invalid &&
+                (description.dirty || description.touched)
+              "
+              class="invalid-feedback"
+            >
+              Indique una fecha valida
+            </div>
+          </div>
+
+          <div class="col-12">
+            <h2>Lista de tareas</h2>
+            <div *ngFor="let tarea of event.tareas; let i = index">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [(ngModel)]="tarea.editable"
+                  name="tareaEditable-{{ i }}"
+                />
+                <ng-container *ngIf="!tarea.editable; else editMode">
+                  <span class="form-check-label">{{ tarea.list }}</span>
+                </ng-container>
+                <ng-template #editMode>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="tarea.list"
+                      name="tareaList-{{ i }}"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-success"
+                        (click)="saveTarea(tarea)"
+                      >
+                        Guardar
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        (click)="deleteTarea(tarea)"
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+
+            <form (ngSubmit)="agregarTarea()">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="nuevaTarea"
+                  placeholder="Agregar nueva tarea"
+                  name="nuevaTarea"
+                />
+                <button class="btn btn-primary" type="submit">Agregar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6 col-4">
+            <button
+              type="button"
+              class="btn btn-danger"
+              *ngIf="modelTitle === 'Editar evento'"
+              (click)="deleteEvent()"
+              id="btn-delete-event"
+            >
+              Eliminar
+            </button>
+          </div>
+          <div class="col-md-6 col-8 text-end">
+            <button
+              type="button"
+              class="btn btn-secondary me-1"
+              (click)="modal.dismiss('')"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success"
+              id="btn-save-event"
+              [disabled]="!eventForm.form.valid"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
       </form>
+    </div>
   </div>
 </ng-template>
