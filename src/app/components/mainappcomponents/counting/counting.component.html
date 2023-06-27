@@ -1,0 +1,33 @@
+<div class="container d-flex flex-column dg-card-color rounded">
+    <!-- Nombre de la función -->
+    <div>
+        <h1 class="text-light">Tabla sencilla de control de billeteras</h1>
+    </div>
+    <!-- Tabla de Vista, filter, sort, search -->
+    <button class="btn btn-sucess text-light" (click)="createShowFunction()">Crear una nueva billetera</button>
+    <app-create-component *ngIf="createShow" [createShow]="createShow" [bank]="bankSelected"></app-create-component>
+    <app-transaction *ngIf="transactionShow" [type]="type" [bank]="bankSelected"></app-transaction>
+    <app-history *ngIf="historyShow" [bank]="bankSelected"></app-history>
+    <div class="row">
+        <div class="col-md-12 col-lg-6 col-xl-4" *ngFor="let bank of allBanks; index as i">
+            <div class="card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h2 class="" style="font-size: 1.5rem;">{{bank.name}}</h2>
+                    <p class="card-text">{{bank.description}}</p>
+                    <p class="card-text" style="font-size: 1.15rem;">Saldo :<span
+                            style="font-size: 1.25rem;">${{bank.initial}}</span>
+                    </p>
+                    <div>
+                        <p class="btn btn-success p-2 m-1" (click)="typeIncomeFunction(bank)">Agregar Ingreso</p>
+                        <p class="btn btn-danger p-2 m-1 " (click)="typeExpenseFunction(bank)">Agregar Egreso</p>
+                    </div>
+                    <p class="btn btn-info p-2 m-1 text-white" (click)="historyShowFunction(bank)">Historial de
+                        dinero
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

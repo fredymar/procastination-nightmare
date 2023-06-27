@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,6 +20,21 @@ import { BarscontainerComponent } from './components/mainappcomponents/barsconta
 import { HabitsComponent } from './components/mainappcomponents/habits/habits.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './components/mainappcomponents/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { EventComponent } from './components/mainappcomponents/calendar/event/event.component';
+import { registerLocaleData } from '@angular/common';
+import localeEs from "@angular/common/locales/es";
+import { CountingComponent } from './components/mainappcomponents/counting/counting.component';
+import { CreateComponentComponent } from './components/mainappcomponents/counting/create-component/create-component.component';
+import { HistoryComponent } from './components/mainappcomponents/counting/history/history.component';
+import { TransactionComponent } from './components/mainappcomponents/counting/transaction/transaction.component';
+registerLocaleData(localeEs)
+
+
 
 @NgModule({
   declarations: [
@@ -36,14 +52,31 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     TasktablesComponent,
     BarscontainerComponent,
     HabitsComponent,
+    CalendarComponent,
+    EventComponent,
+    CountingComponent,
+    CreateComponentComponent,
+    HistoryComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    FullCalendarModule,
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
+    NgbModalModule,
+    CommonModule,
+    DatePipe
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID,
+      useValue: 'es'
+     }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
