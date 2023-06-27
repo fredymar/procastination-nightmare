@@ -19,10 +19,6 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@fullcalendar/angular": "^6.1.8",
-    "@fullcalendar/core": "^4.4.2",
-    "@fullcalendar/daygrid": "^4.4.2",
-    "@fullcalendar/interaction": "^4.4.2",
-    "@fullcalendar/timegrid": "^4.4.2",
     "@fullcalendar/bootstrap": "^6.1.8",
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
@@ -31,20 +27,10 @@
     "@fullcalendar/timegrid": "^6.1.8",
     "@ng-bootstrap/ng-bootstrap": "^15.0.1",
     "@popperjs/core": "^2.11.6",
-<<<<<<< HEAD
     "@types/jsonwebtoken": "^9.0.2",
     "bootstrap": "^5.2.3",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
-=======
-    "angular-calendar": "^0.31.0",
-    "bootstrap": "^5.2.3",
-    "date-fns": "^2.30.0",
-    "luxon": "^3.3.0",
-    "moment": "^2.29.4",
-    "primeicons": "^6.0.1",
-    "primeng": "^16.0.2",
->>>>>>> 3fa6249cb338cac836e86cd7dfc7b9823715761d
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
