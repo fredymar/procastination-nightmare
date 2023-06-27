@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { EventModel } from 'src/app/components/mainappcomponents/calendar/shared/event.model';
@@ -16,6 +16,10 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
+  ngOnInit(): void {
+    this.getAllEvents();
+  }
+
 
   getAllEvents() {
     console.log(this.urlApi);
@@ -24,12 +28,10 @@ export class EventService {
   }
 
 
-
-
   createEvent(data: EventModel) {
     return this.http.post(`${this.urlApi}/createEvent`, data).pipe(
       map((response: any) => {
-        data.id = response.id;
+        data._id = response._id;
         return response;
       })
     );
