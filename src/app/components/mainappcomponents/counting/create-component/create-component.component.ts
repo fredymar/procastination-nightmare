@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BankService } from 'src/app/api/bank/bank.service';
 import { Bank } from 'src/app/models/bank.models';
@@ -11,7 +11,14 @@ import { Bank } from 'src/app/models/bank.models';
 export class CreateComponentComponent {
   @Input() createShow!: Boolean;
   @Input() bank!: String;
+  @Input() functionShow!: Function;
 
+  @Output() changeShow: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+
+  //Raise the event to send the data back to parent
+  updateShowCreate() {
+    this.changeShow.emit(this.createShow);
+  }
 
   createShowFunction() {
     this.createShow = !this.createShow
@@ -27,10 +34,10 @@ export class CreateComponentComponent {
     let data = form.value
     console.log("hola")
     this.bankService.createBank(data).subscribe((data: any) => {
-      console.log({ data });
-      this.bankService.getAllBanks();
-      this.cleanForm();
     });
+    this.bankService.getAllBanks();
+    this.updateShowCreate()
+    this.cleanForm();
   }
 
 }

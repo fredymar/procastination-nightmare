@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-tasktables',
-  templateUrl: './tasktables.component.html',
-  styleUrls: ['./tasktables.component.css']
+  selector: 'app-text-field',
+  templateUrl: './text-field.component.html',
+  styleUrls: ['./text-field.component.css']
 })
-export class TasktablesComponent {
+export class TextFieldComponent {
   @Input() campo1:Boolean = false
+  @Input() content:String = ""
 
   changeCampo1(){
     this.campo1= true
@@ -20,6 +21,8 @@ export class TasktablesComponent {
     },0);
   }
   changeCampo2(){
+    const me:any = document.querySelector("#myInput")
+    this.content= me.value
     this.campo1= false
   }
 }

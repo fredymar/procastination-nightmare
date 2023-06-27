@@ -21,6 +21,8 @@ import esLocale from '@fullcalendar/core/locales/es';
 import { EventService } from 'src/app/api/events/event.service';
 
 
+
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -31,7 +33,7 @@ export class CalendarComponent implements OnInit {
   calendarEventsData: EventInputs[] = [];
   selectedDay: any = {};
   isEditable: boolean = false;
-  event: EventInputs = {
+  event: EventModel = {
     tareas:[]
   };
   // externalEvents: ExternalEvent[] = [];
@@ -51,6 +53,8 @@ export class CalendarComponent implements OnInit {
       // Asignar una copia de los eventos al calendario
       this.calendarOptions.events = [...this.calendarEventsData];
       console.log(events.result);
+      console.log(this.event)
+
     });
 
   }
@@ -118,20 +122,20 @@ export class CalendarComponent implements OnInit {
   /**
    * fetches events
    */
-  _fetchData(): void {
-    this.calendarEventsData = CALENDAREVENTS;
-    // console.log(this.calendarEventsData)
-    // this.externalEvents = EXTERNALEVENTS;
+  // _fetchData(): void {
+  //   this.calendarEventsData = CALENDAREVENTS;
+  //   // console.log(this.calendarEventsData)
+  //   // this.externalEvents = EXTERNALEVENTS;
 
-  }
+  // }
 
   /**
    * Opens event modal
    * @param title title of modal
    * @param data data to be used in modal
    */
-  openEventModal(title: string = '', data: any = {}): void {
-    this.eventModal.openModal(title, data);
+  openEventModal(title: string = '', data: any = {}, isCreating: boolean = false): void {
+    this.eventModal.openModal(title, data, isCreating);
 
   }
 
@@ -150,7 +154,7 @@ export class CalendarComponent implements OnInit {
       tareas: []
     };
     this.isEditable = false;
-    this.openEventModal('Agregar nuevo evento', this.event);
+    this.openEventModal('Agregar nuevo evento', this.event, true);
   }
 
   /**
@@ -188,12 +192,15 @@ export class CalendarComponent implements OnInit {
     this.isEditable = false;
   }
 
+
+
   /**
    * Handling date click on calendar
    * @param arg DateClickArg
    */
   handleDateClick(arg: DateClickArg): void {
     // this.selectedDay = arg;
+    console.log(this.event)
     this.event = {
       id: String(this.calendarEventsData.length + 1),
       title: '',
@@ -206,7 +213,7 @@ export class CalendarComponent implements OnInit {
 
     };
     this.isEditable = false;
-    this.openEventModal('Agregar nuevo evento', this.event);
+    this.openEventModal('Agregar nuevo evento', this.event, true);
   }
 
   /**
@@ -217,6 +224,7 @@ export class CalendarComponent implements OnInit {
   const event = arg.event;
   this.event = {
     id: String(event.id),
+    _id: event.extendedProps['_id'],
     title: event.title,
     classNames: event.classNames,
     category: event.classNames[0],
@@ -226,7 +234,7 @@ export class CalendarComponent implements OnInit {
     tareas: event.extendedProps['tareas']
   };
   this.isEditable = true;
-  this.openEventModal('Editar evento', this.event);
+  this.openEventModal('Editar evento', this.event, false);
   console.log(this.event)
 }
 
@@ -234,7 +242,7 @@ export class CalendarComponent implements OnInit {
    * Handle the event save
    * @param newEvent new event
   */
- handleEventSave(newEvent: EventInputs): void {
+ handleEventSave(newEvent: EventModel): void {
     if (this.isEditable) {
       let modifiedEvents = [...this.calendarEventsData];
       const eventIndex = modifiedEvents.findIndex(
@@ -265,7 +273,7 @@ export class CalendarComponent implements OnInit {
    * Deletes calendar event
    * @param deleteEvent event to be deleted
    */
-  handleEventDelete(deleteEvent: EventInput): void {
+  handleEventDelete(deleteEvent: EventModel): void {
     let modifiedEvents = [...this.calendarEventsData];
     const eventIndex = modifiedEvents.findIndex(
       (event) => event.id === deleteEvent.id

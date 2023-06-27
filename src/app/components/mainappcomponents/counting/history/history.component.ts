@@ -1,4 +1,4 @@
-import { Component,Input,OnInit  } from '@angular/core';
+import { Component,Input,OnInit, Output, EventEmitter  } from '@angular/core';
 import { BankService } from 'src/app/api/bank/bank.service';
 import { Bank } from 'src/app/models/bank.models';
 import { NgForm } from '@angular/forms';
@@ -18,6 +18,13 @@ export class HistoryComponent {
 
   ngOnInit(): void {
     this.getTransactions()
+  }
+
+  @Output() changeShow: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+
+  //Raise the event to send the data back to parent
+  updateShow() {
+    this.changeShow.emit(this.transactionShow);
   }
 
   getTransactions() {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BankService } from 'src/app/api/bank/bank.service';
 import { Bank } from 'src/app/models/bank.models';
@@ -12,6 +12,12 @@ export class TransactionComponent {
   @Input() transactionShow!: Boolean;
   @Input() type!: String;
   @Input() bank!: String;
+  @Output() changeShow: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+
+  //Raise the event to send the data back to parent
+  updateShowTransaction() {
+    this.changeShow.emit(this.transactionShow);
+  }
 
   transactionShowFunction() {
     this.transactionShow = !this.transactionShow
@@ -35,6 +41,7 @@ export class TransactionComponent {
     let data = form.value
     data.bank = this.bank 
     this.bankService.createTransaction(data).subscribe((data: any) => {
+      this.updateShowTransaction()
       console.log({ data });
     });
   }

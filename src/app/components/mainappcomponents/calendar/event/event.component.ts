@@ -1,131 +1,129 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { EventInputs } from '../shared/event.model';
 import { EventInput } from '@fullcalendar/core';
 import { NgForm } from '@angular/forms';
 import { EventService } from 'src/app/api/events/event.service';
 import { EventInputs, EventModel } from '../shared/event.model';
-import { FormsModule } from '@angular/forms';
-
-
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.css'],
 })
 export class EventComponent implements OnInit {
-
-  modelTitle: string = "";
-  event: EventInputs = {
-    tareas: []
+  modelTitle: string = '';
+  event: EventInput = {
+    tareas: [],
   };
+  isCreatingEvent: boolean = true;
+  isEditable: boolean = false;
 
   @Output() eventSaved: EventEmitter<EventInput> = new EventEmitter();
   @Output() eventDeleted: EventEmitter<EventInput> = new EventEmitter();
 
   @ViewChild('content', { static: true }) content: any;
-  constructor (public activeModal: NgbModal, public eventService : EventService) { }
+  constructor(
+    public activeModal: NgbModal,
+    public eventService: EventService
+  ) {}
 
-
-  ngOnInit(): void {
-    console.log(this.event)
-  }
+  ngOnInit(): void {}
 
   /**
    * opens modal
    * @param title title of modal
    * @param data data to be used in modal
    */
-  openModal(title: string, data: any): void {
+  openModal(title: string, data: any, isCreating: boolean): void {
     this.modelTitle = title;
-    this.event = { id: data['id'], title: data['title'], category: data['category'], start: data['start'], end: data['end'], classNames: data['classNames'], description: data['description'], tareas:data['tareas'] };
-    this.activeModal.open(this.content, { backdrop: "static" });
-
+    this.event = {
+      id: data.id,
+      title: data['title'],
+      category: data['category'],
+      start: data['start'],
+      end: data['end'],
+      classNames: data['classNames'],
+      description: data['description'],
+      tareas: data['tareas'],
+      _id: data._id,
+    };
+    this.isEditable = !isCreating;
+    this.isCreatingEvent = isCreating;
+    this.activeModal.open(this.content, { backdrop: 'static' });
   }
 
-  cleanForm() {
-    this.eventService.eventToCreate = new EventModel();
-  }
-
-  /**
-   * stores event in calendar events
-   */
-  createEvent(form: NgForm) {
+  createEvent() {
     this.eventSaved.emit(this.event);
     this.activeModal.dismissAll();
-    let data = this.event
-    console.log("Evento Guardado")
-    this.eventService.createEvent(data).subscribe((data: any) => {
-      console.log(data);
-      this.eventService.getAllEvents();
-      this.cleanForm();
-    });
 
+    let data = this.event;
+    console.log(data);
+    this.eventService.createEvent(data).subscribe((response: any) => {
+      const createdEvent = response.data;
+      console.log({ createdEvent });
+      this.getAllEvents();
+    });
   }
 
-  // createEvent(form: NgForm) {
 
-  //   this.activeModal.dismissAll();
-  //   let data = this.event
-  //   if(data.id) {
-  //     this.eventService.updateEvent(data).subscribe((data) =>{
-  //       this.eventSaved.emit(this.event);
-  //       alert("Evento actualizado")
-  //       this.eventService.getAllEvents()
-  //     })
-  //     this.cleanForm()
-  //     return
-  //   }
+  getAllEvents() {
+    this.eventService.getAllEvents().subscribe((data: any) => {
+      this.eventService.allEvents = data.result;
+      console.log(data);
+    });
+  }
 
-  //   delete(data.id)
-
-  //   this.eventService.createEvent(data).subscribe((data) =>{
-  //     this.eventSaved.emit(this.event);
-  //     console.log({data})
-  //     this.eventService.getAllEvents()
-  //     this.cleanForm()
-  //   })
-  // }
-
-  /**
-   * deletes event from calendar events
-   */
-  deleteEvent() {
+  deleteEvent(_id: string) {
+    this.eventService.deleteEvent(_id).subscribe((data) => {
+      alert('Evento Eliminado');
+      this.getAllEvents();
+    });
     this.eventDeleted.emit(this.event);
     this.activeModal.dismissAll();
   }
 
+  updateEvent() {
+    this.eventService.updateEvent(this.event).subscribe((response: any) => {
+      // Manejar la respuesta del servidor si es necesario
+      alert('Evento actualizado');
+      this.getAllEvents(); // Obtener la lista actualizada de eventos
+      this.activeModal.dismissAll(); // Cerrar el modal
+    });
+  }
+
   saveTarea(tarea: any) {
-    console.log("Tarea guardada:", tarea);
+    console.log('Tarea guardada:', tarea);
     tarea.editable = false;
   }
 
-
   deleteTarea(tarea: any) {
-    if (this.event.tareas) {
-      const index = this.event.tareas.indexOf(tarea);
+    if (this.event['tareas']) {
+      const index = this.event['tareas'].indexOf(tarea);
 
       if (index > -1) {
-        this.event.tareas.splice(index, 1);
-        console.log("Tarea eliminada:", tarea);
+        this.event['tareas'].splice(index, 1);
+        console.log('Tarea eliminada:', tarea);
       }
     }
   }
 
-  nuevaTarea: string = "";
+  nuevaTarea: string = '';
 
   agregarTarea() {
-    console.log(this.event.tareas)
-    console.log(this.event.tareas)
-    if (this.event.tareas) {
-      this.event.tareas.push({
+    console.log(this.event['tareas']);
+    console.log(this.event['tareas']);
+    if (this.event['tareas']) {
+      this.event['tareas'].push({
         list: this.nuevaTarea,
-        editable: false
+        editable: false,
       });
-      this.nuevaTarea = "";
+      this.nuevaTarea = '';
     }
   }
-
-
 }

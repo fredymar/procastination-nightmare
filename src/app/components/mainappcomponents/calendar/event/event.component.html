@@ -15,7 +15,7 @@
         class="needs-validation"
         name="event-form"
         id="form-event"
-        (ngSubmit)="eventForm.submitted && createEvent(eventForm)"
+        (ngSubmit)="eventForm.submitted && createEvent()"
         #eventForm="ngForm"
       >
         <div class="row">
@@ -125,26 +125,26 @@
             <div class="mb-3">
               <label class="form-label">Category</label>
               <select
-              class="form-select"
-              id="event-category"
-              required
-              name="category"
-              [(ngModel)]="event.category"
-              #category="ngModel"
-              [ngClass]="{
-                'is-invalid':
-                  eventForm.submitted &&
-                  category.invalid &&
-                  (category.dirty || category.touched)
-              }"
-              (change)="event.classNames = [event.category]"
-            >
-              <option value="bg-primary" selected>Marketing</option>
-              <option value="bg-septenary">Social</option>
-              <option value="bg-quaternary">Personal</option>
-              <option value="bg-quinary">Urgente</option>
-              <option value="bg-senary">Contabilidad</option>
-            </select>
+                class="form-select"
+                id="event-category"
+                required
+                name="category"
+                [(ngModel)]="event['category']"
+                #category="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    eventForm.submitted &&
+                    category.invalid &&
+                    (category.dirty || category.touched)
+                }"
+                (change)="event.classNames = event['category']"
+              >
+                <option value="bg-primary" selected>Marketing</option>
+                <option value="bg-septenary">Social</option>
+                <option value="bg-quaternary">Personal</option>
+                <option value="bg-quinary">Urgente</option>
+                <option value="bg-senary">Contabilidad</option>
+              </select>
 
               <div
                 *ngIf="
@@ -192,7 +192,7 @@
 
           <div class="col-12">
             <h2>Lista de tareas</h2>
-            <div *ngFor="let tarea of event.tareas; let i = index">
+            <div *ngFor="let tarea of event['tareas']; let i = index">
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -250,7 +250,7 @@
               type="button"
               class="btn btn-danger"
               *ngIf="modelTitle === 'Editar evento'"
-              (click)="deleteEvent()"
+              (click)="deleteEvent(event['_id'])"
               id="btn-delete-event"
             >
               Eliminar
@@ -265,10 +265,18 @@
               Cancelar
             </button>
             <button
-              type="submit"
-              class="btn btn-success"
-              id="btn-save-event"
-              [disabled]="!eventForm.form.valid"
+              *ngIf="isCreatingEvent"
+              type="button"
+              class="btn btn-primary"
+              (click)="createEvent()"
+            >
+              Crear
+            </button>
+            <button
+              *ngIf="!isCreatingEvent"
+              type="button"
+              class="btn btn-primary"
+              (click)="updateEvent()"
             >
               Guardar
             </button>
