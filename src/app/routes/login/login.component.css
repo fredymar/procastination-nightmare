@@ -4,18 +4,20 @@
   padding: 40px;
   margin: auto;
   background: #fff;
+  border-radius: 20px ;
   box-shadow: 0px 0px 3px grey;
 }
 
 h3{
   color: #303f9f;
-  font-family: "Roboto";
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
 .contenedor-formulario {
   width: 100%;
   color: #f2f2f2;
+  margin-top: 100px;
   padding: 50px;
 }
 .contenedor-formulario .formulario {
@@ -93,13 +95,14 @@ h3{
 
 .contenedor-formulario .formulario input[type="submit"] {
   background: #303f9f;
-  border-radius: 1px;
+  border-radius: 5px;
   border: 2px solid #f2f2f2;
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Roboto";
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 16px;
+  font-weight: bold;
   padding: 15px;
   width: 100%;
   -webkit-transition: all 0.3s ease;
