@@ -26,7 +26,7 @@
                     #description="ngModel" [(ngModel)]="bankService.transactionToCreate.description" class="form-control"  rows="2"></textarea>
                 </div>
                 <div class="modal-footer p-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="updateShowTransaction()">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </div>
             </form>

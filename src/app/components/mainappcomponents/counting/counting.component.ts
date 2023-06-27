@@ -1,4 +1,4 @@
-import { Component ,OnInit,Input} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { BankService } from 'src/app/api/bank/bank.service';
 import { Bank } from 'src/app/models/bank.models';
 
@@ -15,7 +15,7 @@ export class CountingComponent {
   allBanks: Bank[] = []
   bankSelected = ''
 
-  constructor(public bankService: BankService) {}
+  constructor(public bankService: BankService) { }
 
   ngOnInit(): void {
     this.bankService.getAllBanks().subscribe((data: any) => {
@@ -24,25 +24,46 @@ export class CountingComponent {
     });
   }
 
+  deleteBank(bank:any){
+    this.bankService.deleteBank(bank._id).subscribe((data: any) => {
+      console.log({ data });
+      this.allBanks = data
+    });
+  }
 
-  createShowFunction(){
+  updateShow(show:Boolean) {
+    this.historyShow = !this.historyShow
+  }
+  updateShowTransaction(show:Boolean) {
+    this.transactionShow  = !this.transactionShow 
+  }
+  updateShowCreate(show:Boolean) {
+    this.createShow = !this.createShow
+    this.bankService.getAllBanks().subscribe((data: any) => {
+      console.log({ data });
+      this.allBanks = data
+    });
+  }
+
+
+  createShowFunction() {
     this.createShow = !this.createShow
   }
-  transactionShowFunction(){
+  transactionShowFunction() {
     this.transactionShow = !this.transactionShow
   }
-  typeIncomeFunction(bank:any){
+  typeIncomeFunction(bank: any) {
     this.type = 'income'
     this.bankSelected = bank._id
     this.transactionShow = !this.transactionShow
   }
-  typeExpenseFunction(bank:any){
+  typeExpenseFunction(bank: any) {
     this.type = 'expense'
     this.bankSelected = bank._id
     this.transactionShow = !this.transactionShow
   }
 
-  historyShowFunction(bank:any){
+  historyShowFunction(bank: any) {
     this.bankSelected = bank._id
     this.historyShow = !this.historyShow
   }
