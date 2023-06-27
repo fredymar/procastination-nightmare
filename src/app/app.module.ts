@@ -28,7 +28,8 @@ import { CountingComponent } from './components/mainappcomponents/counting/count
 import { CreateComponentComponent } from './components/mainappcomponents/counting/create-component/create-component.component';
 import { HistoryComponent } from './components/mainappcomponents/counting/history/history.component';
 import { TransactionComponent } from './components/mainappcomponents/counting/transaction/transaction.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './routes/login/login.component';
+import { RegisterComponent } from './routes/register/register.component';
 registerLocaleData(localeEs)
 
 
@@ -54,7 +55,8 @@ registerLocaleData(localeEs)
     CreateComponentComponent,
     HistoryComponent,
     TransactionComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
