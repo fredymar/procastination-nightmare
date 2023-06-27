@@ -32,6 +32,8 @@ import { CountingComponent } from './components/mainappcomponents/counting/count
 import { CreateComponentComponent } from './components/mainappcomponents/counting/create-component/create-component.component';
 import { HistoryComponent } from './components/mainappcomponents/counting/history/history.component';
 import { TransactionComponent } from './components/mainappcomponents/counting/transaction/transaction.component';
+import { TextFieldComponent } from './components/mainappcomponents/tasktables/text-field/text-field.component';
+import { StateModalComponent } from './components/mainappcomponents/tasktables/state-modal/state-modal.component';
 registerLocaleData(localeEs)
 
 
@@ -57,7 +59,9 @@ registerLocaleData(localeEs)
     CountingComponent,
     CreateComponentComponent,
     HistoryComponent,
-    TransactionComponent
+    TransactionComponent,
+    TextFieldComponent,
+    StateModalComponent
   ],
   imports: [
     BrowserModule,

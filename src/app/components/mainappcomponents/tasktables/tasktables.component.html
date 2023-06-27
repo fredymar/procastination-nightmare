@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex flex-column dg-card-color gap-2 mt-5 rounded p-4 ms-5">
+<div class="container-fluid d-flex flex-column dg-card-color gap-2 ms-2 rounded p-4 me-1">
     <!-- Nombre de la función -->
     <div>
         <h1 class="text-light">Tabla de control de tareas de un equipo</h1>
@@ -224,7 +224,7 @@
     </div>
     <!-- Div de Tabla y Tabla -->
     <div class="table-responsive dg-corner-border dg-nowrap">
-        <table class="table bg-dark dg-corner-border align-middle text-center">
+        <table class="table bg-dark dg-corner-border align-middle text-center" id="myTable">
             <!-- Cabecera -->
             <thead>
             <tr class="text-light dg-no-border-table">
@@ -278,22 +278,33 @@
             <!-- Cuerpo-->
             <tbody>
             <!-- Fila 1 -->
-            <tr id="myRow" class="text-light dg-no-border-table">
-                <th style="border-bottom: none;" scope="row">1</th>
-                <td>Crear HTML y CSS</td>
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    <!-- <button class="inv-button" (click)="changeCampo1()"> Crear HTML y CSS <input id="myInput" *ngIf="campo1" class="inv-input" type="text" value="Crear HTML y CSS" (blur)="changeCampo2()"></button> -->
+                    <app-text-field content="Crear HTML y CSS"></app-text-field>
+                </td>
                 <td id="fila1">
-                  <!-- <button class="btn btn-success">Completado</button> -->
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Completado
                     </button>
                 </td>
-                <td>Frontend</td>
-                <td>22-Mar-2023</td>
-                <td>23-Mar-2023</td>
-                <td style="border-bottom: none;">Roberto</td>
+                <td>
+                    <!-- Frontend -->
+                    <app-text-field content="Frontend"></app-text-field>
+                </td>
+                <td>
+                    <app-text-field content="23-Mar-2023"></app-text-field>
+                </td>
+                <td>
+                    <app-text-field content="25-Mar-2023"></app-text-field>
+                </td>
+                <td>
+                    <app-text-field content="Roberto"></app-text-field>
+                </td>
             </tr>
             <!-- Fila 2 -->
-            <tr class="text-light dg-no-border-table">
+            <!-- <tr class="text-light dg-no-border-table">
                 <th scope="row">2</th>
                 <td>Diseño de la base de datos</td>
                 <td id="fila2" >
@@ -305,9 +316,9 @@
                 <td>15-Mar-2023</td>
                 <td>25-Mar-2023</td>
                 <td style="border-bottom: none;">Rodrigo</td>
-            </tr>
+            </tr> -->
             <!-- Fila 3 -->
-            <tr class="text-light dg-no-border-table">
+            <!-- <tr class="text-light dg-no-border-table">
                 <th scope="row">3</th>
                 <td>Diseño de Mock-Ups</td>
                 <td id="fila3">
@@ -319,9 +330,9 @@
                 <td>16-Mar-2023</td>
                 <td>01-Abr-2023</td>
                 <td style="border-bottom: none;">Carmen</td>
-            </tr>
+            </tr> -->
             <!-- Fila 4 -->
-            <tr class="text-light dg-no-border-table">
+            <!-- <tr class="text-light dg-no-border-table">
                 <th scope="row">4</th>
                 <td>Comprar Pizza</td>
                 <td id="fila4">
@@ -333,9 +344,9 @@
                 <td>26-Mar-2023</td>
                 <td>27-Mar-2023</td>
                 <td style="border-bottom: none;">Karen</td>
-            </tr>
+            </tr> -->
             <!-- Fila 5 -->
-            <tr class="text-light dg-no-border-table">
+            <!-- <tr class="text-light dg-no-border-table">
                 <th scope="row">5</th>
                 <td>Preparación del servidor</td>
                 <td id="fila5">
@@ -347,9 +358,9 @@
                 <td>30-Mar-2023</td>
                 <td>15-Abr-2023</td>
                 <td style="border-bottom: none;">Mario</td>
-            </tr>
+            </tr> -->
             <!-- Fila 6 -->
-            <tr class="text-light dg-no-border-table">
+            <!-- <tr class="text-light dg-no-border-table">
                 <th scope="row">6</th>
                 <td>Adquisición del Dominio</td>
                 <td id="fila6">
@@ -361,35 +372,14 @@
                 <td>N/A</td>
                 <td>N/A</td>
                 <td style="border-bottom: none;">Juan</td>
-            </tr>
+            </tr> -->
             
             </tbody>
         </table>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Seleccione un estado:</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body d-flex flex-wrap dg-flex-wrap-personalized gap-2">
-        <button id="opt1" class="btn btn-success" data-bs-dismiss="modal">Completado</button>
-        <button id="opt2" class="btn btn-primary" data-bs-dismiss="modal">En Progreso</button>
-        <button id="opt3" class="btn btn-warning" data-bs-dismiss="modal">Con Demora</button>
-        <button id="opt4" class="btn btn-light" data-bs-dismiss="modal">Aplazado</button>
-        <button id="opt5" class="btn btn-danger" data-bs-dismiss="modal">Cancelado</button>
-        <button id="opt6" class="btn btn-secondary" data-bs-dismiss="modal">No Iniciado</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-
+<app-state-modal></app-state-modal>
 
 </div>
