@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -15,7 +16,9 @@ import { TeamComponent } from './components/team/team.component';
 import { MainappComponent } from './routes/mainapp/mainapp.component';
 import { TasktablesComponent } from './components/mainappcomponents/tasktables/tasktables.component';
 import { BarscontainerComponent } from './components/mainappcomponents/barscontainer/barscontainer.component';
-
+import { HabitsComponent } from './components/mainappcomponents/habits/habits.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -32,11 +35,13 @@ import { BarscontainerComponent } from './components/mainappcomponents/barsconta
     MainappComponent,
     TasktablesComponent,
     BarscontainerComponent,
+    HabitsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [],
   bootstrap: [AppComponent]

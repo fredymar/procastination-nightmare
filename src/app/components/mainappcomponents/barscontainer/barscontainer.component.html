@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="list-unstyled">
-                    <a [routerLink]="['/mainapp']" (click)="selection='none'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
+                    <a [routerLink]="['/mainapp']" (click)="selection='habits'" class="link-lateral-navbar fs-6 text-decoration-none position-relative d-table">
                         <span class="material-icons-outlined position-relative text-center">
                             autorenew
                         </span>
@@ -112,6 +112,7 @@
 
         <div class="container space-work m-2" [ngSwitch]="selection">
             <app-tasktables *ngSwitchCase="'tasktables'"></app-tasktables>
+            <app-habits *ngSwitchCase="'habits'"></app-habits>
             <div *ngSwitchDefault>
                 Seleccione una app
             </div>

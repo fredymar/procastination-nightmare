@@ -1,0 +1,31 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" />
+    <link rel="stylesheet" href="./habits.component.css">
+</head>
+
+<div class="container">
+    <div class="bg-white justify-content-center rounded-1 pt-1 table-responsive">
+        <div class="m-3 ms-4">
+            <h3>{{actualDay}}/<span class="fw-bold">{{actualMonth}}</span></h3>
+        </div>
+
+        <table class="table table-bordered" style="table-layout: fixed">
+            <thead>
+                <th class="text-center">Hora</th>
+                <th *ngFor="let day of weekDays" class="text-center">{{day}}</th>
+            </thead>
+            <tbody class="table-dark">
+                <tr *ngFor=" let time of hours" class="text-black fw-bold text-center bg-body">{{time}}
+                    <td *ngFor="let day of weekDays"></td>
+                </tr>
+            </tbody>
+        </table>
+       
+    </div>
+    <div class="col-xl-4">
+        
+    </div>
+</div>
