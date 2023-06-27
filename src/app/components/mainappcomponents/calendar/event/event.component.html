@@ -15,7 +15,7 @@
         class="needs-validation"
         name="event-form"
         id="form-event"
-        (ngSubmit)="eventForm.submitted && createEvent(eventForm)"
+        (ngSubmit)="eventForm.submitted && createEventOrUpdate()"
         #eventForm="ngForm"
       >
         <div class="row">
@@ -129,7 +129,7 @@
               id="event-category"
               required
               name="category"
-              [(ngModel)]="event.category"
+              [(ngModel)]="event['category']"
               #category="ngModel"
               [ngClass]="{
                 'is-invalid':
@@ -137,7 +137,7 @@
                   category.invalid &&
                   (category.dirty || category.touched)
               }"
-              (change)="event.classNames = [event.category]"
+              (change)="event.classNames = ['event.category']"
             >
               <option value="bg-primary" selected>Marketing</option>
               <option value="bg-septenary">Social</option>
@@ -192,7 +192,7 @@
 
           <div class="col-12">
             <h2>Lista de tareas</h2>
-            <div *ngFor="let tarea of event.tareas; let i = index">
+            <div *ngFor="let tarea of event['tareas']; let i = index">
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -246,15 +246,15 @@
         </div>
         <div class="row mt-2">
           <div class="col-md-6 col-4">
-            <button
+            <!-- <button
               type="button"
               class="btn btn-danger"
               *ngIf="modelTitle === 'Editar evento'"
-              (click)="deleteEvent()"
+              (click)="deleteEvent(_id)"
               id="btn-delete-event"
             >
               Eliminar
-            </button>
+            </button> -->
           </div>
           <div class="col-md-6 col-8 text-end">
             <button

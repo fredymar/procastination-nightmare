@@ -194,6 +194,7 @@ export class CalendarComponent implements OnInit {
    */
   handleDateClick(arg: DateClickArg): void {
     // this.selectedDay = arg;
+    console.log(this.event)
     this.event = {
       id: String(this.calendarEventsData.length + 1),
       title: '',

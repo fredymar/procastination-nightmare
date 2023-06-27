@@ -24,11 +24,12 @@ export class EventService {
   }
 
 
+
+
   createEvent(data: EventModel) {
     return this.http.post(`${this.urlApi}/createEvent`, data).pipe(
       map((response: any) => {
-        // Asignar el ID generado al evento creado
-        data._id = response._id;
+        data.id = response.id;
         return response;
       })
     );

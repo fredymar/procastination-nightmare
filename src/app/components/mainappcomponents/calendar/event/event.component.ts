@@ -5,7 +5,6 @@ import { EventInput } from '@fullcalendar/core';
 import { NgForm } from '@angular/forms';
 import { EventService } from 'src/app/api/events/event.service';
 import { EventInputs, EventModel } from '../shared/event.model';
-import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 export class EventComponent implements OnInit {
 
   modelTitle: string = "";
-  event: EventInputs = {
+  event: EventInput = {
     tareas: []
   };
 
@@ -29,7 +28,7 @@ export class EventComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.event)
+
   }
 
   /**
@@ -39,7 +38,7 @@ export class EventComponent implements OnInit {
    */
   openModal(title: string, data: any): void {
     this.modelTitle = title;
-    this.event = { id: data['id'], title: data['title'], category: data['category'], start: data['start'], end: data['end'], classNames: data['classNames'], description: data['description'], tareas:data['tareas'] };
+    this.event = { id: data['id'], title: data['title'], category: data['category'], start: data['start'], end: data['end'], classNames: data['classNames'], description: data['description'], tareas:data['tareas'], _id: data['_id'] };
     this.activeModal.open(this.content, { backdrop: "static" });
 
   }
@@ -51,49 +50,65 @@ export class EventComponent implements OnInit {
   /**
    * stores event in calendar events
    */
-  createEvent(form: NgForm) {
+  // createEvent(form: NgForm) {
+  //   let data = this.event
+  //   this.eventService.createEvent(data).subscribe((data: any) => {
+  //     this.eventService.getAllEvents();
+  //     console.log("Evento Guardado")
+  //   });
+  //   this.eventSaved.emit(this.event);
+  //   this.activeModal.dismissAll();
+  // }
+
+
+
+  createEventOrUpdate() {
     this.eventSaved.emit(this.event);
     this.activeModal.dismissAll();
     let data = this.event
-    console.log("Evento Guardado")
-    this.eventService.createEvent(data).subscribe((data: any) => {
-      console.log(data);
-      this.eventService.getAllEvents();
-      this.cleanForm();
-    });
+    console.log(data)
+    if(data['_id']) {
+      this.eventService.updateEvent(data).subscribe((data) =>{
+        alert("Evento actualizado")
+        this.getAllEvents()
+      })
+      return
+    }
 
+    delete(data['_id'])
+
+    this.eventService.createEvent(data).subscribe((data) =>{
+      console.log({data})
+      this.getAllEvents()
+    })
   }
 
-  // createEvent(form: NgForm) {
 
-  //   this.activeModal.dismissAll();
+  // updateEvent(){
   //   let data = this.event
-  //   if(data.id) {
-  //     this.eventService.updateEvent(data).subscribe((data) =>{
-  //       this.eventSaved.emit(this.event);
-  //       alert("Evento actualizado")
-  //       this.eventService.getAllEvents()
-  //     })
-  //     this.cleanForm()
-  //     return
-  //   }
-
-  //   delete(data.id)
-
-  //   this.eventService.createEvent(data).subscribe((data) =>{
-  //     this.eventSaved.emit(this.event);
-  //     console.log({data})
-  //     this.eventService.getAllEvents()
-  //     this.cleanForm()
-  //   })
+  //   if(data.id === this.event.id){}
   // }
+
+  getAllEvents(){
+    let data = this.event
+    this.eventService.getAllEvents().subscribe((data: any)=>{
+      this.eventService.allEvents= data.result || []
+      console.log(data)
+    })
+  }
 
   /**
    * deletes event from calendar events
    */
-  deleteEvent() {
-    this.eventDeleted.emit(this.event);
-    this.activeModal.dismissAll();
+
+
+  deleteEvent(_id: string){
+    let eventId = this.event["_def"].id
+    console.log(eventId)
+    this.eventService.deleteEvent(eventId).subscribe((data) =>{
+      alert("Evento Eliminado")
+      this.getAllEvents()
+    })
   }
 
   saveTarea(tarea: any) {
@@ -103,11 +118,11 @@ export class EventComponent implements OnInit {
 
 
   deleteTarea(tarea: any) {
-    if (this.event.tareas) {
-      const index = this.event.tareas.indexOf(tarea);
+    if (this.event['tareas']) {
+      const index = this.event['tareas'].indexOf(tarea);
 
       if (index > -1) {
-        this.event.tareas.splice(index, 1);
+        this.event['tareas'].splice(index, 1);
         console.log("Tarea eliminada:", tarea);
       }
     }
@@ -116,10 +131,10 @@ export class EventComponent implements OnInit {
   nuevaTarea: string = "";
 
   agregarTarea() {
-    console.log(this.event.tareas)
-    console.log(this.event.tareas)
-    if (this.event.tareas) {
-      this.event.tareas.push({
+    console.log(this.event['tareas'])
+    console.log(this.event['tareas'])
+    if (this.event['tareas']) {
+      this.event['tareas'].push({
         list: this.nuevaTarea,
         editable: false
       });
