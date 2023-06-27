@@ -63,7 +63,7 @@ registerLocaleData(localeEs)
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     FullCalendarModule,
     HttpClientModule,
     FormsModule,
